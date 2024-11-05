@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head><title>Q5</title>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+<script>
+	$(document).ready(function(){
+ $("#b1").click(function(){
+ $("ul").append("<li>CSS</li>");
+ });
+ $("#b2").click(function(){
+ $("ul").prepend("<li>'Introduction to Full Stack Development'</li>");
+ });
+$("#b3").click(function(){
+ $("ul").after("<p>'Topics updated' </p>");
+ });
+$("#b4").click(function(){
+ $("ul").before("<h1>'List of Topics Covered' </h1>");
+ });
+
+});
+</script>
+	
+  	
+
+   
+</head>
+<body>
+
+
+	<h1>'List of Topics Covered'1 </h1>
+	<h1>'List of Topics Covered'2 </h1>
+	<p>'Topics updated' 1 </p>
+	<p>'Topics updated' 2 </p>	
+	<ul>
+	<li>'Getting Started with Full Stack'</li>
+	<li>'HTML'</li>
+	<li>'CSS'</li>
+	
+	</ul>
+	
+	<button id="b1">Append</button>
+	<button id="b2">Prepend</button>
+	<button id="b3">After</button>
+	<button id="b4">Before</button>
+
+
+
+</body>
+</html>

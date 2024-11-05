@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html >
+<head>
+       <title>Q4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#text").click(function() {
+		alert($("p").text());
+                });
+$("#html").click(function() {
+		alert($("div").html());
+                });
+
+        });
+    </script>
+
+    <style>
+      
+    </style>
+</head>
+
+<body>
+<button id="text">Fetch Text</button>
+<button id="html">Fetch HTML</button>
+   <div>
+<p>Paragraph 1</p>
+ </div>
+</body>
+</html>

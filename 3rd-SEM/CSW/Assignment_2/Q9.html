@@ -1,0 +1,80 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dropdown</title>
+
+<style>
+.dropdown{
+position:relative;
+display:inline-block;
+color:blue;
+width:100px;
+height:60px;
+}
+
+button{
+background-color:gray;
+border:2px solid black;
+padding:10px;
+}
+
+.dropdown-content{
+position:absolute;
+display:none;
+color:red;
+border:2px solid black;
+min-width:100px;
+
+}
+.dropdown-content a{
+display:block;
+background-color:#8f82d9;
+
+color:#073e6b;
+border:2px solid black;
+padding:10px 10px;
+}
+
+.dropdown:hover .dropdown-content {
+display:block;
+background-color:#76d9de;
+
+
+}
+
+.dropdown-content a:hover  {
+display:block;
+background-color:#76d9de;
+
+
+}
+.dropdown:hover button {
+background-color:#6dbf83;
+
+
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class ="dropdown">
+<button>Move Cursor</button>
+
+<div class ="dropdown-content">
+<a href ="#CSW">CSW</a>
+<a href ="#DLD">DLD</a>
+<a href ="#AD">AD</a>
+</div>
+
+</div>
+
+
+</body>
+</html>
+
+

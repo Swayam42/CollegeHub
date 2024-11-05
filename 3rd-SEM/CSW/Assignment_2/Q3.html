@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <title>Interactive Div</title>
+    <style>
+        .special-div {
+            font-size: 18px;
+            color: #333; 
+            transition: color 0.3s; 
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        img:hover  +.special-div {
+            color: #ff6600; 
+        }
+    </style>
+</head>
+<body>
+    <img src="4.jpg" alt="Your Special Image">
+    <div class="special-div">それは日本です</div>
+</body>
+</html>

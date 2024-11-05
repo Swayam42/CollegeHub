@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html >
+<head>
+       <title>Q3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#start").click(function() {
+              
+                $("#myDiv").animate(
+		{width: '400px'}
+                , 2000); 
+            });
+
+            $("#stop").click(function() {
+              
+                $("#myDiv").stop(true);
+            });
+        });
+    </script>
+
+    <style>
+       #myDiv {
+            background-color: #48a1b5;
+            width: 100px; 
+            height: 100px;
+            display: block;
+         
+            text-align: center;
+            line-height: 100px; 
+            color: white; 
+           
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myDiv"></div><br>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+</html>

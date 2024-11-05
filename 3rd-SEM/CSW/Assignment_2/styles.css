@@ -1,0 +1,28 @@
+/* Body background color */
+body {
+    background-color: #f0f8ff;
+}
+
+/* Styling the h5 heading */
+h5 {
+    font-size: 16px;
+    font-style: italic;
+    color: #ff6600;
+}
+
+/* Styling paragraphs using the class */
+.content-paragraph {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Internal styles handled via the id attributes */
+#special-heading {
+    text-align: center;
+    font-weight: bold;
+}
+
+#important-heading {
+    text-align: right;
+    font-weight: 600;
+}
