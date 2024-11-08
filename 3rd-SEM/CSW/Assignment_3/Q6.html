@@ -3,12 +3,27 @@
 <head>
    
     <title>Q6</title>
-    <style>
+    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#addHighlight').click(function() {
+                $('#myDiv').removeClass('dim').addClass('highlight');
+            });
+            $('#addDim').click(function() {
+                $('#myDiv').removeClass('highlight').addClass("dim");
+            });
+        });
+    </script>
+
+<style>
         .highlight {
             background-color: yellow;
         }
         .dim {
-            opacity: 0.5;
+           background-color: yellow;
+            opacity: 0.3;
         }
 
 	#myDiv{
@@ -17,17 +32,6 @@
 	border: 1px solid black;
 	}
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#addHighlight').click(function() {
-                $('#myDiv').removeClass('dim').addClass('highlight');
-            });
-            $('#addDim').click(function() {
-                $('#myDiv').removeClass('highlight').addClass('dim');
-            });
-        });
-    </script>
 </head>
 <body>
     <button id="addHighlight">Add Highlight</button>
