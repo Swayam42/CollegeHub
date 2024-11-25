@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Q8</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script> 
+   $(document).ready(function() { 
+    $('#removeButton').click(function() { 
+        var tval = $("#pa").val();
+        if(tval){
+            var element = $("#" + tval);
+                  } else {
+            alert("Data missing");
+        }
+    }); 
+});
+
+    </script>
+</head>
+<body>
+    <div id="content">
+        <p id="para1">This is paragraph 1.</p>
+        <p id="para2">This is paragraph 2.</p>
+        <p id="para3">This is paragraph 3.</p>
+    </div>
+    <label for="pa">Enter</label>
+    <input type="text" id="pa" placeholder="Enter element ID">
+    <button id="removeButton">Remove Element</button>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
