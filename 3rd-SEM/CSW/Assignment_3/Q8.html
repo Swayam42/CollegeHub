@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Q8</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script> 
-   $(document).ready(function() { 
-    $('#removeButton').click(function() { 
-        var tval = $("#pa").val();
-        if(tval){
-            var element = $("#" + tval);
-                  } else {
-            alert("Data missing");
-        }
-    }); 
-});
-
+        $(document).ready(function(){
+	        $("#b1").click(function(){
+	            const textval = $("#pa").val();
+	                if(textval){
+		                $("#"+textval).remove();
+		            }
+	                else{
+	                    alert("Data is Missing !!");
+	                    }
+	                });
+	        });
     </script>
 </head>
 <body>
@@ -23,17 +23,8 @@
         <p id="para2">This is paragraph 2.</p>
         <p id="para3">This is paragraph 3.</p>
     </div>
-    <label for="pa">Enter</label>
+    <label for="pa">Enter Element ID:</label>
     <input type="text" id="pa" placeholder="Enter element ID">
-    <button id="removeButton">Remove Element</button>
+    <button id="b1">Remove Element</button>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
