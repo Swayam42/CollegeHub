@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Custom Popup Box</title>
+    <title>Q9</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
         .modal {
@@ -13,54 +13,40 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
         }
-        .modal-content { 
+        .content { 
             margin: 15% auto; 
             padding: 20px; 
             background: #fff; 
-            width: 80%;
-            max-width: 400px; 
+            width: 300px; 
             text-align: center;
         }
         .close { 
             cursor: pointer; 
-            font-size: 20px; 
             float: right; 
         }
-        #pop { 
+        #btn { 
             padding: 10px 20px; 
             background: #4CAF50; 
-            color: white; 
-           
+            color: #fff; 
             cursor: pointer; 
         }
     </style>
 </head>
 <body>
-
-    <button id="pop">Open Popup</button>
-
-    <div id="myModal" class="modal">
-        <div class="modal-content">
+    <button id="btn">Open</button>
+    <div id="modal" class="modal">
+        <div class="content">
             <span class="close">&times;</span>
-            <p>This is a custom popup box!</p>
+            <p>Custom Popup!</p>
         </div>
     </div>
-
     <script>
         $(document).ready(function() {
-            $("#pop").click(function() {
-                $("#myModal").fadeIn();
-            });
-            $(".close").click(function() {
-                $("#myModal").fadeOut();
-            });
-            $(window).click(function(event) {
-                if ($(event.target).is("#myModal")) {
-                    $("#myModal").fadeOut();
-                }
+            $("#btn").click(function() { $("#modal").fadeIn(); });
+            $(".close, #modal").click(function(e) { 
+                if (e.target == this) $("#modal").fadeOut(); 
             });
         });
     </script>
-
 </body>
 </html>
