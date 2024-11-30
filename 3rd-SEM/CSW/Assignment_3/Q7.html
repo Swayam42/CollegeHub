@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Q7</title>
+    <style>
+       table{
+        width:50%;
+       }
+        table,th,td {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        th,td {
+            padding: 8px;
+            text-align: left;
+        }
+        .input-container {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+           
+            $("#addRow").click(function () {
+                const name = $("#name").val();
+                const age = $("#age").val();
+                const grade = $("#grade").val();
+
+                if (name && age && grade) {
+                   
+                    $("tbody").append("<tr><td>"+name+"</td><td>"+age+"</td><td>"+grade+"</td></tr>");
+                    $("#name").val("");
+                    $("#age").val("");
+                    $("#grade").val("");
+                } else {
+                    alert("Please fill out all fields.");
+                }
+            });
+            
+            $("#changeColor").click(function () {
+                $("td").css("color", "red");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Student Data Table</h1>
+
+    <div class="input-container">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter name">
+        <label for="age">Age:</label>
+        <input type="text" id="age" placeholder="Enter age">
+        <label for="grade">Grade:</label>
+        <input type="text" id="grade" placeholder="Enter grade">
+        <button id="addRow">Add Row</button>
+        <button id="changeColor">Change Color</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+         
+        </tbody>
+    </table>
+
+    
+</body>
+</html>
