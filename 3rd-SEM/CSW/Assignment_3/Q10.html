@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Up Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        input { margin: 8px 0;
+            padding: 5px; 
+            width: 100%; 
+        }
+        .error { color: red; 
+            display: none; 
+        }
+    </style>
+
+<script>
+    $(document).ready(function () {
+        $("#signupForm").submit(function (e) {
+            e.preventDefault();
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var password = $("#password").val();
+
+            if (!name || !email || !password || !email.includes("@")) {
+                $("#errorMsg").show();
+            } else {
+                $("#errorMsg").hide();
+                alert("Form submitted successfully!");
+            }
+        });
+    });
+</script>
+</head>
+<body>
+
+<form id="signupForm">
+    <h3>Sign Up</h3>
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <input type="submit" value="Sign Up">
+    <p class="error" id="errorMsg">Please fill all fields correctly.</p>
+</form>
+
+
+
+</body>
+</html>
