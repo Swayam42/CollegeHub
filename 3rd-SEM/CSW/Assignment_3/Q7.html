@@ -1,77 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Q7</title>
-    <style>
-       table{
-        width:50%;
-       }
-        table,th,td {
-            border-collapse: collapse;
+   <title>Q7</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   
+   <style>
+        table, th, td {
             border: 1px solid black;
-        }
-        th,td {
+            border-collapse: collapse;
             padding: 8px;
-            text-align: left;
         }
-        .input-container {
-            margin-bottom: 10px;
-        }
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   </style>
 
-    <script>
-        $(document).ready(function () {
-           
-            $("#addRow").click(function () {
-                const name = $("#name").val();
-                const age = $("#age").val();
-                const grade = $("#grade").val();
+   <script>
+        $(document).ready(function() {
+            $(".addRow").click(function(){
+                const name1 = $("#name").val();
+                const reg1 = $("#reg").val();
+                const sec1 = $("#section").val();
 
-                if (name && age && grade) {
-                   
-                    $("tbody").append("<tr><td>"+name+"</td><td>"+age+"</td><td>"+grade+"</td></tr>");
+                // Ensure all fields are filled
+                if (name1 && reg1 && sec1) {
+                    // Corrected string interpolation using backticks
+                    $("tbody").append(`<tr><td>${name1}</td><td>${reg1}</td><td>${sec1}</td></tr>`);
+
+                    // Clear input fields after adding the row
                     $("#name").val("");
-                    $("#age").val("");
-                    $("#grade").val("");
+                    $("#reg").val("");
+                    $("#section").val("");
                 } else {
-                    alert("Please fill out all fields.");
+                    alert("Please fill in all fields.");
                 }
             });
-            
-            $("#changeColor").click(function () {
-                $("td").css("color", "red");
+
+            $(".change-color").click(function() {
+                // Toggle row color by adding/removing a class
+                $("tbody tr").each(function() {
+                    $(this).toggleClass("highlight");
+                });
             });
         });
-    </script>
+   </script>
+
+   <style>
+       .highlight {
+           color: yellow;
+       }
+   </style>
 </head>
 <body>
-    <h1>Student Data Table</h1>
+    <h2>Student Data</h2>
+    
+    <br>
+    <input type="text" id="name" placeholder="Name">
+    <input type="number" id="reg" placeholder="Registration Number">
+    <input type="text" id="section" placeholder="Section">
 
-    <div class="input-container">
-        <label for="name">Name:</label>
-        <input type="text" id="name" placeholder="Enter name">
-        <label for="age">Age:</label>
-        <input type="text" id="age" placeholder="Enter age">
-        <label for="grade">Grade:</label>
-        <input type="text" id="grade" placeholder="Enter grade">
-        <button id="addRow">Add Row</button>
-        <button id="changeColor">Change Color</button>
-    </div>
+    <br><br>
+    <button class="addRow">Add Row</button>
+    <button class="change-color">Change Color</button>
 
     <table>
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Age</th>
-                <th>Grade</th>
+                <th>Registration Number</th>
+                <th>Section</th>
             </tr>
         </thead>
         <tbody>
-         
+            <!-- Table rows will be added dynamically here -->
         </tbody>
     </table>
-
-    
 </body>
 </html>
