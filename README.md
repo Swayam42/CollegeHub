@@ -4,7 +4,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
 
 ---
 
-### 1. **[CSW](./CSW)**
+### 1. **[CSW](./3rd-SEM/CSW)**
    - This folder contains files related to the **Computer Science Workshop**.
    - **Subfolders**:
      - [Assignment 1](./3rd-SEM/CSW/Assignment_1)
@@ -15,7 +15,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
 
 ---
 
-### 2. **[AD_Lab](./AD_Lab)**
+### 2. **[AD_Lab](./3rd-SEM/AD_Lab)**
    - Contains materials for the **Algorithm Design Lab**.
    - **Subfolders**:
      - [Assignment 1](./3rd-SEM/AD_Lab/Assignment_1)
@@ -27,7 +27,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
 
 ---
 
-### 3. **[DLD_LAB](./DLD_LAB)**
+### 3. **[DLD_LAB](./3rd-SEM/DLD_LAB)**
    - Resources and experiments for the **Digital Logic Design Lab**.
    - **Subfolders**:
      - [Lab_4(VHDL Intro)](./3rd-SEM/DLD_LAB/Lab_4)
