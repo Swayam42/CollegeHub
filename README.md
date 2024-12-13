@@ -11,7 +11,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
      - [Assignment 2](./3rd-SEM/CSW/Assignment_2)
      - [Assignment 3](./3rd-SEM/CSW/Assignment_3)
      - [Assignment 4](./3rd-SEM/CSW/Assignment_4)
-     - [Project_1](./3rd-SEM/CSW/Project_1)
+     - [Project_1](./3rd-SEM/CSW/Project_1) || Live site URL : https://swayam42.github.io/CollegeHub/
      
 
 ---
