@@ -33,8 +33,10 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
 ### 3. **[DLD_LAB](./3rd-SEM/DLD_LAB)**
    - Resources and experiments for the **Digital Logic Design Lab**.
    - **Subfolders**:
+     - [Project_1(four_bit_comparator)](./3rd-SEM/DLD_LAB/Project_1)
      - [Lab_4(VHDL Intro)](./3rd-SEM/DLD_LAB/Lab_4)
      - [Lab_5(Combinational Ckt)](./3rd-SEM/DLD_LAB/Lab_5)
+   
        
 
 ---
