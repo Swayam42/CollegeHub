@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <style>
+   .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+  </style>
+</head>
+<body>
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+    <li data-target="#demo" data-slide-to="3"></li>
+  </ul>
+
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://sirs.edu.in/wp-content/uploads/2022/11/SIS.jpg" alt="School Image">
+
+      <div class="carousel-caption">
+        <h3>Best School</h3>
+        <p>Asia's Biggest and World's 11th Ranked School</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+       <img src="https://pbs.twimg.com/media/Fs7A0TvXoAEFTpZ?format=jpg&name=large" alt="School Image 2">
+
+      <div class="carousel-caption">
+        <h3>Cultural Event</h3>
+        <p>Students performing a traditional dance during the annual cultural fest.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://educationworldtoday.weebly.com/uploads/1/2/9/9/129950251/differences-between-playschool-and-nursery_orig.jpg" alt="School Image 4">
+
+      <div class="carousel-caption">
+        <h3></h3>
+        <p>Relive the magic of Tomorrowland Winter 2024 with live sets</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://cdn.uc.assets.prezly.com/24ed0af8-9d1e-4c94-843c-ac5c58ae6206/-/resize/1108x/-/quality/best/-/format/auto/" alt="Tomo2">
+      <div class="carousel-caption">
+        <h3>Playground Fun</h3>
+        <p>Children enjoying various sports activities on the school playground.</p>
+      </div>
+    </div>
+  </div>
+
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+</body>
+</html>
