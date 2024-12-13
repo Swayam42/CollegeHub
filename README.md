@@ -11,6 +11,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
      - [Assignment 2](./3rd-SEM/CSW/Assignment_2)
      - [Assignment 3](./3rd-SEM/CSW/Assignment_3)
      - [Assignment 4](./3rd-SEM/CSW/Assignment_4)
+     - [Project_1](./3rd-SEM/CSW/Project_1)
      
 
 ---
@@ -24,6 +25,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
      - [Assignment 4](./3rd-SEM/AD_Lab/Assignment_4)
      - [Assignment 5](./3rd-SEM/AD_Lab/Assignment_5)
      - [Assignment 6](./3rd-SEM/AD_Lab/Assignment_6)
+     - [Assignment 7](./3rd-SEM/AD_Lab/Assignment_7)
 
 ---
 
