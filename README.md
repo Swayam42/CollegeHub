@@ -26,6 +26,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
      - [Assignment 5](./3rd-SEM/AD_Lab/Assignment_5)
      - [Assignment 6](./3rd-SEM/AD_Lab/Assignment_6)
      - [Assignment 7](./3rd-SEM/AD_Lab/Assignment_7)
+     - [Assignment 8](./3rd-SEM/AD_Lab/Assignment_8)
 
 ---
 
