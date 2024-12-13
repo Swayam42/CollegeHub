@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+            transition: background-color 0.5s ease;
+        }
+        .edit-btn {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-btn {
+            background-color: #f44336; /* Red */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Information</h2>
+    <input type="text" id="search" class="form-control" placeholder="Search by name">
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Semester</th>
+                <th>Registration Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be added here dynamically -->
+        </tbody>
+    </table>
+
+    <h3>Add New Student</h3>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name">
+    </div>
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" class="form-control" id="age" placeholder="Enter age">
+    </div>
+    <div class="form-group">
+        <label for="semester">Semester:</label>
+        <input type="text" class="form-control" id="semester" placeholder="Enter semester">
+    </div>
+    <div class="form-group">
+        <label for="reg">Registration Number:</label>
+        <input type="text" class="form-control" id="reg" placeholder="Enter registration number">
+    </div>
+    <button class="btn btn-primary addRow">Add Student</button>
+</div>
+
+<script>
+$(document).ready(function() {
+    $(".addRow").click(function(){
+        const name1 = $("#name").val();
+        const age1 = $("#age").val();
+        const sem1 = $("#semester").val();
+        const reg1 = $("#reg").val();
+
+        // Ensure all fields are filled
+        if (name1 && age1 && sem1 && reg1) {
+            // Corrected string interpolation using backticks
+            $("tbody").append(`<tr><td>${name1}</td><td>${age1}</td><td>${sem1}</td><td>${reg1}</td><td> <button class="delete-btn">Delete</button></td></tr>`);
+
+            // Clear input fields after adding the row
+            $("#name").val("");
+            $("#age").val("");
+            $("#semester").val("");
+            $("#reg").val("");
+        } else {
+            alert("Please fill in all fields.");
+        }
+    });
+
+    
+    // Delete button functionality
+    $(document).on("click", ".delete-btn", function() {
+        $(this).closest("tr").remove();
+    });
+
+    // Search functionality
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+</script>
+
+</body>
+</html>
