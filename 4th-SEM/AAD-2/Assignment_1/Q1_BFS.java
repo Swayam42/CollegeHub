@@ -15,14 +15,14 @@ class Queue{
 	}
 	
 	int dequeue() {
-		if(!isEmpty()) {
-			list.remove(0);
+		if(isEmpty()) {
+			System.out.println("Empty");
 		}
 		return list.remove(0);
 	}
 	
 }
-public class BFS_Q1 {
+public class Q1_BFS {
 	
 	static void addEdge(ArrayList<ArrayList<Integer>> adj,int u,int  v) {
 		adj.get(u).add(v);
