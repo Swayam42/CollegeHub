@@ -1,5 +1,7 @@
-package Assignment_1;
-
+/*Write a Java program with a Car class having private fields (make, model), a 
+parameterized constructor, getter, and setter methods. In the CarTester class, 
+instantiate myCar1 with values and myCar2 with null. Print their initial details, 
+update myCar2 using setters, and print the updated details.  */
 class Car{
 	 String make;
 	 String model;
@@ -32,7 +34,7 @@ class Car{
 	}
 	
 }
-public class Q1 {
+public class Q1_CarTester {
 
 	public static void main(String[] args) {
 		Car myCar1=new Car("Tata","Nano");
@@ -49,3 +51,16 @@ public class Q1 {
 	}
 
 }
+
+/*OUTPUT 
+
+ Initially : 
+
+Car1 : Tata Nano
+Car2 : null null
+
+After Update : 
+
+Car1 : Tata Nano
+Car2 : BMW M2
+ */
