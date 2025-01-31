@@ -9,7 +9,7 @@ public class ImageApp extends Image{
 		int s=sc.nextInt();
 		ImageLibrary ob=new ImageLibrary(s);
 		for(int i=0;i<s;i++) {
-			System.out.print("Input imageWidth : ");
+			System.out.print("\nInput imageWidth : ");
 			int w=sc.nextInt();
 			System.out.print("Input imageHeight : ");
 			int h=sc.nextInt();
@@ -21,7 +21,17 @@ public class ImageApp extends Image{
 			ob.addImage(obj);
 		}
 		
-		ob.display();
+		System.out.print("Input element to search : ");
+		
+		System.out.print("Input imageWidth : ");
+		int w=sc.nextInt();
+		System.out.print("Input imageHeight : ");
+		int h=sc.nextInt();
+	System.out.print("Input colorCode : ");
+		int c=sc.nextInt();
+		Image img=new Image(w,h,c);
+		
+		System.out.println(ob.search(img).toString());
 		
 	}
 
