@@ -3,8 +3,21 @@
 Welcome to the **CollegeHub** repository! This repository contains various assignments, notes, and projects organized into different folders for easy access.
 
 ---
+### 1. **[CSW-2](./4th-SEM/CSW-2)**
+   - This folder contains files related to the **Computer Science Workshop 2**.
+     - [Assignment 1](./4th-SEM/CSW-2/Assignment_1)
+---
 
-### 1. **[CSW](./3rd-SEM/CSW)**
+### 2. **[AD_Lab](./4th-SEM/AAD-2)**
+   - Contains materials for the **Algorithm Design Lab**
+     - [Assignment 1](./4th-SEM/AAD-2/Assignment_1)
+     - [Assignment 2](./4th-SEM/AAD-2/Assignment_2)
+     - [Assignment 3](./4th-SEM/AAD-2/Assignment_3)
+     - [Assignment 4](./4th-SEM/AAD-2/Assignment_4)
+
+---
+
+### 3. **[CSW-1](./3rd-SEM/CSW)**
    - This folder contains files related to the **Computer Science Workshop**.
      - [Assignment 1](./3rd-SEM/CSW/Assignment_1)
      - [Assignment 2](./3rd-SEM/CSW/Assignment_2)
@@ -16,7 +29,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
 
 ---
 
-### 2. **[AD_Lab](./3rd-SEM/AD_Lab)**
+### 4. **[AD_Lab](./3rd-SEM/AD_Lab)**
    - Contains materials for the **Algorithm Design Lab**
      - [Assignment 1](./3rd-SEM/AD_Lab/Assignment_1)
      - [Assignment 2](./3rd-SEM/AD_Lab/Assignment_2)
@@ -29,7 +42,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
 
 ---
 
-### 3. **[DLD_LAB](./3rd-SEM/DLD_LAB)**
+### 5. **[DLD_LAB](./3rd-SEM/DLD_LAB)**
    - Resources and experiments for the **Digital Logic Design Lab**.
      - [Project_1(four_bit_comparator)](./3rd-SEM/DLD_LAB/Project_1)
      - [Lab_4(VHDL Intro)](./3rd-SEM/DLD_LAB/Lab_4)
