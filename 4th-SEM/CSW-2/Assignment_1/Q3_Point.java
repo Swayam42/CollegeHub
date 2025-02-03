@@ -5,22 +5,26 @@ constructor to create a new point object with the same attribute values. Ensure 
 modifications made to one object do not affect the other. Utilize getter and setter 
 methods to retrieve and update the attribute values.
  */
+package Assignment_1;
+import java.util.*;
 class Point{
-    private int x;
-    private int y;
+	
 
-    Point(int x,int y){
-        this.x=x;
-        this.y=y;
-    }
-    //Copy Constructor
-    Point(Point p){
-        this.x=p.x;
-        this.y=p.y;
-    } 
-    
-    //Getter and Setter Methods :
-    public int getX() {
+	int x;
+	int y;
+	
+	public Point(int x,int y) {
+		this.x=x;
+		this.y=y;
+	}
+	
+	//copy constructor
+	Point(Point p){
+		x=p.x;
+		y=p.y;
+	}
+
+	public int getX() {
 		return x;
 	}
 
@@ -35,22 +39,48 @@ class Point{
 	public void setY(int y) {
 		this.y = y;
 	}
-    @Override
-    public String toString(){
-        return x+","+y;
-    }
+	
+	public String toString() {
+		return x +","+y;
+	}
+	
+	public int distance(Point p1,Point p2) {
+		
+		int d= (int)(Math.sqrt(Math.pow((p2.getX()-p1.getX()),2)+Math.pow(p2.getY()-p1.getY(),2)));
+		return d;
+	}
+	
+	
+	
+	
+}
+public class Q3 {
+
+	public static void main(String[] args) {
+		Point p1 =new Point(10,15);
+		System.out.println("Point p1 : "+p1.toString());
+		Point p2=new Point(p1);
+		System.out.println("Point p2 : "+p2.toString());
+		
+		Point p3=new Point(5,7);
+		System.out.println("\nPoint p3 : "+p3.toString());
+		Point p4=new Point(8,4);
+		System.out.println("Point p4 : "+p4.toString());
+		
+		int d=p1.distance(p3,p4);
+		System.out.println("Distance betn p3 and p4 : "+d);
+
+		
+	}
+	
 }
 
-public class Q3_Point {
-    public static void main(String[] args) {
-        Point p1=new Point(23,56);
-        System.out.println("Point p1 : "+p1.toString());
-        Point p2=new Point(p1);
-        System.out.println("Point p2 : "+p2.toString());
-    }
-}
 /*
  OUTPUT 
-Point p1 : 23,56
-Point p2 : 23,56
+Point p1 : 10,15
+Point p2 : 10,15
+
+Point p3 : 5,7
+Point p4 : 8,4
+Distance betn p3 and p4 : 4
  */
