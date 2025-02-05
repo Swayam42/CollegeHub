@@ -6,6 +6,7 @@ MainEnrollApp class, demonstrate functionality by managing student enrollments.
 Use comments to explain how the design maintains loose coupling (by relying on 
 interfaces) and high cohesion (by keeping related functionalities within appropriate 
 classes).  */
+/*NOT TO BE WRITTEN IN LAB COPY*/
 import java.util.ArrayList;
 class Student{
     private String name;
@@ -15,7 +16,7 @@ class Student{
         this.studentId=studentId;
 
     }
-
+/*NOT TO BE WRITTEN IN LAB COPY*/
     public String getName(){
         return name;
     }
@@ -26,7 +27,7 @@ class Student{
     public String getStudent(){
         return "Student Name : "+name+" , Student Id : "+studentId;
     }
-
+/*NOT TO BE WRITTEN IN LAB COPY*/
 }
 class Course{
     private String courseName;
@@ -47,7 +48,7 @@ class Course{
     public String getCourse(){
         return courseName+" , Course Code : "+courseCode;
     }
-
+/*NOT TO BE WRITTEN IN LAB COPY*/
 }
 interface EnrollmentSystem{
      void enroll(Student s,Course c);
@@ -76,7 +77,7 @@ public void drop(Student student, Course course) {
         System.out.println(student.getName() + " is not enrolled in " + course.getCourse());
     }
 }
-
+/*NOT TO BE WRITTEN IN LAB COPY*/
     public void displayDetails(){
         System.out.println("Details of Student : ");
         for(Student stud:studentList){
