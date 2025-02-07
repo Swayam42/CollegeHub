@@ -5,7 +5,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
 ---
 ### 1. **[CSW-2](./4th-SEM/CSW-2)**
    - This folder contains files related to the **Computer Science Workshop 2**. 
-     - [ClassWorks](./4th-SEM/CSW-2/Classworks)
+     - [ClassWorks](./4th-SEM/CSW-2/ClassWorks)
      - [Assignment 1](./4th-SEM/CSW-2/Assignment_1)
 ---
 
