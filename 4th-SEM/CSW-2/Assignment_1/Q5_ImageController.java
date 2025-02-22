@@ -1,80 +1,68 @@
-package Assignment_1;
-import java.util.*;
+/*
+ Create an ImageLibrary, which contains a set of image objects (from Q4) and 
+operations such as searching an image, inserting an image, and getting an image. 
+Create an ImageController class to manage the program execution and call the 
+methods to create and manipulate images.
+ */
+import java.util.Scanner;
+class ImageLibrary{
+    private Image arrayOfImageObject[];
+    private int maxSize;
+    private int imgCount;
 
-class ImageLibrary extends Image{
-	Image arrayOfImageObject[]; 
-	int maxSize; //to store the size of array
-	int imgCount; 
-	
-	public ImageLibrary(int maxSize){
-		imgCount=0;
-		this.maxSize=maxSize;
-		arrayOfImageObject=new Image[maxSize];
-	}
-	
-	
-	public void addImage(Image ob) {
-	arrayOfImageObject[imgCount]=new Image(ob.getImageWidth(),ob.getImageHeight(),ob.getColorCode());
-	imgCount++;
-	}
-	
-	//method to return an image from the array :
-	public Image getImage(int i) {
-		return arrayOfImageObject[i];
-	}
-	
-	//method to search  an object
-	public Image search(Image x) {
-		for(int i=0;i<=imgCount;i++){
-			if(arrayOfImageObject[i].equals(x)) {
-				return arrayOfImageObject[i];
-			}
-		}
-		return x;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		Image obj=(Image)o; //Object o type casted to Image type and stored in obj
-		return imageWidth==obj.imageWidth && imageHeight==obj.imageHeight && colorCode==obj.colorCode;
-	}
-	
-	
-	void display() {
-		for(int i=0;i<imgCount;i++) {
-			System.out.println(arrayOfImageObject[i].toString());
-		}
-	}
+     ImageLibrary(int maxSize){
+        this.imgCount=0;
+        this.maxSize=maxSize;
+        arrayOfImageObject=new Image[maxSize];
+    }
+    //method to insert an image :
+    public void addImage(Image ob) {
+        arrayOfImageObject[imgCount]=new Image(ob.getImageWidth(),ob.getImageHeight(),ob.getColorCode());
+        imgCount++;
+        }
+        
+        //method to return an image from the array :
+        public Image getImage(int i) {
+           if(i<imgCount && i>=0){
+            return arrayOfImageObject[i];
+           }else{
+            System.out.println("Invalid index");
+            return null;
+           }
+        }
+        
+        //method to search  an object
+        public Image search(Image x) {
+            for(int i=0;i<imgCount;i++){
+                if(arrayOfImageObject[i].equals(x)) {
+                    return arrayOfImageObject[i];
+                }
+            }
+            return null;
+        }
+        
+        void display() {
+            for(int i=0;i<imgCount;i++) {
+                System.out.println(arrayOfImageObject[i].toString());
+            }
+        }
 }
-public class Q5_ImageController {
-public static void main(String[] args) {
-		Scanner sc=new Scanner(System.in);
-		System.out.print("Input ImageLibrarySize : ");
-		int s=sc.nextInt();
-		ImageLibrary ob=new ImageLibrary(s);
-//		for(int i=0;i<s;i++) {
-//			System.out.print("Input imageWidth : ");
-//			int w=sc.nextInt();
-//			System.out.print("Input imageHeight : ");
-//			int h=sc.nextInt();
-//		System.out.print("Input colorCode : ");
-//			int c=sc.nextInt();
-//			
-//			
-//			Image obj=new Image(w,h,c);
-//			ob.addImage(obj);
-//		}
-		
-		Image img1=new Image(12,43,6);
-		Image img2=new Image(12,63,60);
-		ob.addImage(img1);
-		ob.addImage(img2);
-		System.out.println(ob.search(img1));
-		
-		
-		
-	
-		
-	}
 
+public class Q5_ImageController {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter size");
+	    int s=sc.nextInt();
+	    ImageLibrary lib1= new ImageLibrary(s);
+	    
+	 for(int i=0;i<s;i++) {
+		System.out.println("Enter object");
+		lib1.addImage(new Image(sc.nextInt(),sc.nextInt(),sc.next()));
+		System.out.println("continue ? yes= +1 / no= -1");
+	    if(sc.nextInt()==-1)
+	    	 break;
+	 }
+	 System.out.println("Enter to search Img");
+	 System.out.println(lib1.search(new Image(sc.nextInt(),sc.nextInt(),sc.next())).toString());
+    }
 }
