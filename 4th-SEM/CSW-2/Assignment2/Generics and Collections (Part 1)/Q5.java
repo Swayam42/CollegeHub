@@ -1,15 +1,16 @@
+package Assignment_2_1;
 /*Write a program to create a Student class with member variables name, rollNumber, 
 and totalMark. The program should create an array of Student objects and sort them 
 using the Bubble Sort algorithm based on their roll numbers.
 Note: Implement the Comparable interface and override the compareTo() method for 
 comparison
 */
-package Assignment2_1;
-class Student2 implements Comparable<Student2>{
+
+class Student implements Comparable<Student>{
 	String name;
 	int rollNumber;
 	int totalMark;
-	public Student2(String name, int rollNumber, int totalMark) {
+	public Student(String name, int rollNumber, int totalMark) {
 		
 		this.name = name;
 		this.rollNumber = rollNumber;
@@ -34,7 +35,7 @@ class Student2 implements Comparable<Student2>{
 		this.totalMark = totalMark;
 	}
 	@Override
-	public int compareTo(Student2 s) {
+	public int compareTo(Student s) {
 		if(this.rollNumber==s.rollNumber) {
 			return 0;
 		}else if(this.rollNumber>s.rollNumber){
@@ -48,30 +49,15 @@ class Student2 implements Comparable<Student2>{
 		return "\nName :"+getName()+"\nRoll Number : "+getRollNumber()+"\nTotal Marks : "+getTotalMark();
 	}
 	
-	void bubbleSort(int arr[])
-    {
-        int n = arr.length;
-      
-        for (int i = 0; i < n - 1; i++)
-            for (int j = 0; j < n - i - 1; j++)
-                if (arr[j] > arr[j + 1]) {
-                  
-                    // swap temp and arr[i]
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-    }
-	
 }
 public class Q5 {
 	
 	public static void main(String[] args) {
-		Student2 s1=new Student2("Adu",4,99);
-		Student2 s2=new Student2("Kadu",2,78);
-		Student2 s3=new Student2("Chattu",1,56);
-		Student2 s[]={s1,s2,s3};
-		Student2 s4=new Student2("Banar",4,56);
+		Student s1=new Student("Adu",4,99);
+		Student s2=new Student("Kadu",2,78);
+		Student s3=new Student("Chattu",1,56);
+		Student s[]={s1,s2,s3};
+		Student s4=new Student("Banar",4,56);
 
 		for(int i=0;i<s.length-1;i++) {
 			for(int j=0;j<s.length-i-1;j++) {
@@ -84,7 +70,23 @@ public class Q5 {
 		}
 		
 		for(int i=0;i<s.length;i++) {
-			System.out.print(s[i].getName()+" ");
+			System.out.println(s[i]);
 		}
 	}
 }
+
+/*
+Output :
+
+Name :Adu
+Roll Number : 1
+Total Marks : 99
+
+Name :Kadu
+Roll Number : 2
+Total Marks : 78
+
+Name :Chattu
+Roll Number : 4
+Total Marks : 56
+*/
