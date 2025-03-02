@@ -1,12 +1,12 @@
 /*Write a program to create a Book class with the following member variables: bookId, 
 bookName, and price. Implement the appropriate constructor and methods for this 
-class.
-Additionally, create a driver class to:
-i. Instantiate two Book objects.
-ii. Compare the books based on their price.
-iii. Print the details of both books.
-Note: Override the toString() and equals() methods.*/
-package Assignment2_1;
+class. 
+Additionally, create a driver class to: 
+i. Instantiate two Book objects. 
+ii. Compare the books based on their price. 
+iii. Print the details of both books. 
+Note: Override the toString() and equals() methods.  */
+package Assignment_2.Part_1;
 class Book{
 	int bookId;
 	String bookName;
@@ -53,11 +53,11 @@ public class Q2 {
 	Book b2=new Book(456,"R D Sharma Maths",599.9);
 	
 	System.out.println("\nBook 1 "+b1.toString());
-	System.out.println("\nBook 2 "+b1.toString());
+	System.out.println("\nBook 2 "+b2.toString());
 	if(b1.equals(b2)) {
-		System.out.println("\nBoth books prices are same");
+		System.out.println("\nBoth books have same prices");
 	}else {
-		System.out.println("\nBoth books prices are not same");
+		System.out.println("\nBoth books have different prices");
 	}
 
 	}
@@ -66,17 +66,15 @@ public class Q2 {
 
 /*
 Output :
-
-Book 1 
+Book 1
 BookId : 123
 Book Name : Chabila Barnabodha
 Price : 45.5
 
-Book 2 
-BookId : 123
-Book Name : Chabila Barnabodha
-Price : 45.5
+Book 2
+BookId : 456
+Book Name : R D Sharma Maths
+Price : 599.9
 
-Both books prices are not same
-
+Both books have different prices
 */
