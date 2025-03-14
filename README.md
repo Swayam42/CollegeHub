@@ -1,15 +1,17 @@
 # CollegeHub
 
-Welcome to the **CollegeHub** repository! This repository contains various assignments, notes, and projects organized into different folders for easy access.
+Welcome to the **CollegeHub** repository! This repository contains various assignments, notes, and projects of SOA ITER organized into different folders for easy access.
 
 ---
 ### 1. **[CSW-2](./4th-SEM/CSW-2)**
    - This folder contains files related to the **Computer Science Workshop 2**. 
      - [ClassWorks](./4th-SEM/CSW-2/ClassWorks)
      - [Assignment 1](./4th-SEM/CSW-2/Assignment_1)
+     - [Assignment 2](./4th-SEM/CSW-2/Assignment2)
+     - [Assignment 3](./4th-SEM/CSW-2/Assignment_3)
 ---
 
-### 2. **[AD_Lab](./4th-SEM/AAD-2)**
+### 2. **[AAD-2_Lab](./4th-SEM/AAD-2)**
    - Contains materials for the **Algorithm Design Lab**
      - [Assignment 1](./4th-SEM/AAD-2/Assignment_1)
      - [Assignment 2](./4th-SEM/AAD-2/Assignment_2)
@@ -30,7 +32,7 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
 
 ---
 
-### 4. **[AD_Lab](./3rd-SEM/AD_Lab)**
+### 4. **[AAD-1_Lab](./3rd-SEM/AD_Lab)**
    - Contains materials for the **Algorithm Design Lab**
      - [Assignment 1](./3rd-SEM/AD_Lab/Assignment_1)
      - [Assignment 2](./3rd-SEM/AD_Lab/Assignment_2)
@@ -54,8 +56,4 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
        
 
 ---
-
-## How to Use
-1. Navigate to the desired folder by clicking the links above.
-2. Access files and resources directly from GitHub.
 
