@@ -8,10 +8,10 @@ must throw a NullPointerException with a meaningful error message. */
 public class Q1 {
 
 	public static void main(String[] args) {
-		String s="Stri76ng";
+		String s="St3r2i5ng";
 		try {
 			boolean num=false;
-			System.out.println("Numeric Characters : ");
+			System.out.print("Numeric Characters : ");
 			for(int i=0;i<s.length();i++) {
 				if(Character.isDigit(s.charAt(i))) {
 					num=true;
@@ -20,7 +20,9 @@ public class Q1 {
 						
 					}
 				}
-			}System.out.println("Numeric char not found");
+			}if(num==false) {
+				System.out.println("Numeric char not found");
+			}
 		}
 		catch(NullPointerException e) {
 			System.out.println("Null String");
@@ -30,3 +32,15 @@ public class Q1 {
 	}
 
 }
+
+/*OUTPUT :
+s="St3r2i5ng"
+Numeric Characters : 3 2 5 
+
+s=null
+Numeric Characters : Null String
+java.lang.NullPointerException: Cannot invoke "String.length()" because "s" is null
+
+s="String"
+Numeric Characters : Numeric char not found
+*/
