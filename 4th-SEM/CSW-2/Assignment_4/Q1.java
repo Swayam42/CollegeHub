@@ -48,4 +48,8 @@ Object Suresh is created
 Object Main is Garbage Collected
 Object Suresh is Garbage Collected
 Object Ramesh is Garbage Collected
+
+Note: The exact output of the garbage collection messages may vary depending on when the 
+garbage collector runs and which objects it decides to collect first. 
+The order of garbage collection messages is not guaranteed.
 */
