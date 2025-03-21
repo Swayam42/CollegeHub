@@ -1,0 +1,18 @@
+String class in java : Immutable sequences of UNICODE characters
+
+WAYS TO CREATE STRING : 
+1.String s="hello";
+2.String s3=new String("Kya hui");
+3.char ch[]= {'h','e','l','l','o'};
+  String s4=new String(ch);
+
+
+
+
+when we use new keyword : both the String objects point to 2 different locations
+when we declare normally : 
+String s1="hello";
+String s2="hello";
+here : "hello" ---> s1 and s2
+
+methods fo String :
