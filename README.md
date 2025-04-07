@@ -9,6 +9,9 @@ Welcome to the **CollegeHub** repository! This repository contains various assig
      - [Assignment 1](./4th-SEM/CSW-2/Assignment_1)
      - [Assignment 2](./4th-SEM/CSW-2/Assignment2)
      - [Assignment 3](./4th-SEM/CSW-2/Assignment_3)
+     - [Assignment 4](./4th-SEM/CSW-2/Assignment_4)
+     - [Assignment 5](./4th-SEM/CSW-2/Assignment_5)
+     - [Assignment 6](./4th-SEM/CSW-2/Assignment_6)
 ---
 
 ### 2. **[AAD-2_Lab](./4th-SEM/AAD-2)**
