@@ -1,5 +1,5 @@
 # CollegeHub
-<img src="assets/logo.PNG" alt="Logo" width="200" />
+<img src="assets/logo.PNG" alt="Logo" width="800" />
 
 Welcome to the **CollegeHub** repository! This repository contains various assignments, notes, and projects of SOA ITER organized into different folders for easy access.
 
