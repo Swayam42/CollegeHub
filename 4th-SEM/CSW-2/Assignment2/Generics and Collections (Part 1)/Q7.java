@@ -36,9 +36,9 @@ public class Q7 {
             new Student("Charlie", 2, 19),
   
         };
-        Arrays.sort(students, new Comparator<Student3>() {
+        Arrays.sort(students, new Comparator<Student>() {
             @Override
-            public int compare(Student3 s1, Student3 s2) {
+            public int compare(Student s1, Student s2) {
                 return Integer.compare(s1.rollNo, s2.rollNo);
             }
         });
