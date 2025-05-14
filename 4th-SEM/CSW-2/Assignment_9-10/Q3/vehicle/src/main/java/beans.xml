@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="car1" class="com.spring.Car">
+        <property name="name" value="BMW" />
+        <property name="id" value="145" />
+    </bean>
+
+    <bean id="car2" class="com.spring.Car">
+        <property name="name" value="Alto" />
+        <property name="id" value="541" />
+    </bean>
+
+    <bean id="bike1" class="com.spring.Bike">
+        <property name="name" value="Splendor" />
+        <property name="id" value="12" />
+    </bean>
+
+    <bean id="bike2" class="com.spring.Bike">
+        <property name="name" value="Royal Enfield" />
+        <property name="id" value="504" />
+    </bean>
+</beans>
