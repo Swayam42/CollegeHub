@@ -1,0 +1,25 @@
+Dependencies for Project 'ScCalculatorV2', Target 'Target 1': (DO NOT MODIFY !)
+F (.\calculator.s)(0x68238ECD)(--cpu Cortex-M4 --li --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Users\swaya\Desktop\Scientific_Calculator-V2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include-I C:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 518" --pd "ARMCM4 SETA 1"--list .\listings\calculator.lst --xref -o .\objects\calculator.o --depend .\objects\calculator.d)
+F (.\main.c)(0x682399ED)(-c --cpu Cortex-M4 -D__EVAL --li -g -O0 --apcs=interwork --split_sections -I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Users\swaya\Desktop\Scientific_Calculator-V2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x569E0D62)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x569E0D62)
+F (.\startup_ARMCM4.s)(0x68238D76)(--cpu Cortex-M4 --li --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Users\swaya\Desktop\Scientific_Calculator-V2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include-I C:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 518" --pd "ARMCM4 SETA 1"--list .\listings\startup_armcm4.lst --xref -o .\objects\core_cmsimd.o --depend .\objects\core_cmsimd.d)
+F (C:\Keil_v5\ARM\Pack\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Source\system_ARMCM4.c)(0x55D44230)(-c --cpu Cortex-M4 -D__EVAL --li -g -O0 --apcs=interwork --split_sections -I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Users\swaya\Desktop\Scientific_Calculator-V2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM4-o .\objects\system_armcm4.o --omf_browse .\objects\system_armcm4.crf --depend .\objects\system_armcm4.d)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include\ARMCM4.h)(0x562098DC)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm4.h)(0x5625DA34)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569E0D62)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625C678)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625C678)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625C678)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmSimd.h)(0x5625C678)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include\system_ARMCM4.h)(0x55D44230)
+F (.\retarget.c)(0x6823985E)(-c --cpu Cortex-M4 -D__EVAL --li -g -O0 --apcs=interwork --split_sections -I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Users\swaya\Desktop\Scientific_Calculator-V2\RTE-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DARMCM4-o .\objects\retarget.o --omf_browse .\objects\retarget.crf --depend .\objects\retarget.d)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include\ARMCM4.h)(0x562098DC)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm4.h)(0x5625DA34)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569E0D62)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x5625C678)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x5625C678)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x5625C678)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmSimd.h)(0x5625C678)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include\system_ARMCM4.h)(0x55D44230)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x569E0D62)

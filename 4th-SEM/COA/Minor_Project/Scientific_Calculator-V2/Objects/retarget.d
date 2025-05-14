@@ -1,0 +1,10 @@
+.\objects\retarget.o: retarget.c
+.\objects\retarget.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include\ARMCM4.h
+.\objects\retarget.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm4.h
+.\objects\retarget.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\retarget.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h
+.\objects\retarget.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h
+.\objects\retarget.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h
+.\objects\retarget.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmSimd.h
+.\objects\retarget.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\Device\ARM\ARMCM4\Include\system_ARMCM4.h
+.\objects\retarget.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
