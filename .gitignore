@@ -1,0 +1,79 @@
+# Compiled executables
+*.exe
+*.out
+*.app
+*.dSYM/
+
+# C/C++ compiled files
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+
+# Java compiled files
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# Java build directories
+target/
+build/
+bin/
+out/
+
+# Application configuration files
+application.properties
+application-*.properties
+config.properties
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Log files
+*.log
+logs/
+
+# Package files
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tgz
+
+# Node modules (if any web projects)
+node_modules/
+
+# Python compiled files (if any Python projects)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Backup files
+*.bak
+*.backup
