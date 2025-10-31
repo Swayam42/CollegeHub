@@ -1,0 +1,136 @@
+echo "Enter first float num: "
+read a 
+echo "Enter sec float num: "
+read b
+
+sum=$((a+b))
+sub=$((a-b))
+mul=$((a*b))
+div=$((a/b))
+
+echo "Addition : $(echo "$sum" | bc -l)"
+echo "Subtraction : $(echo "$sub" | bc -l)"
+echo "Multiplication : $(echo "$mul" | bc -l)"
+echo "Division : $(echo(scale=2; if($n2 == 0) print \"error\" else $n1 / $n2" | bc))"
+
+
+----------------------------------------------------------------------------------------------------------------
+echo "Enter Ramesh's basic salary:"
+read basic
+
+da=$(echo "0.4 * $basic" | bc -l)
+hra=$(echo "0.3 * $basic" | bc -l)
+gross=$(echo "$basic + $da + $hra" | bc -l)
+
+echo "Dearness Allowance: $da"
+echo "House Rent Allowance: $hra"
+echo "Gross Salary: $gross"
+
+----------------------------------------------------------------------------------------------------------
+even=0
+odd=0
+
+echo "Enter 10 numbers:"
+
+for ((i=1; i<=10; i++))
+do
+    read num
+    if (( num % 2 == 0 ))
+    then
+        ((even++))
+    else
+        ((odd++))
+    fi
+done
+
+echo "Total even numbers: $even"
+echo "Total odd numbers: $odd"
+------------------------------------------------------------------------------
+
+echo "Enter cost price:"
+read cp
+echo "Enter selling price:"
+read sp
+
+if (( $(echo "$sp > $cp" | bc -l) )); then
+    profit=$(echo "$sp - $cp" | bc -l)
+    echo "Profit: $profit"
+elif (( $(echo "$sp < $cp" | bc -l) )); then
+    loss=$(echo "$cp - $sp" | bc -l)
+    echo "Loss: $loss"
+else
+    echo "No profit, no loss"
+fi
+------------------------------------------------------------------
+
+echo "Enter a year:"
+read year
+year=${year:-$(date +%Y)}
+if (( year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) )); then
+    echo "$year is a leap year"
+else
+    echo "$year is not a leap year"
+fi
+----------------------------------------------------------------------
+
+echo "Enter internal mark:"
+read mark
+echo "Enter attendance percentage:"
+read attend
+
+if (( mark >= 20 )) && (( attend >= 75 )); then
+    echo "Allowed for Semester"
+else
+    echo "Not allowed"
+fi
+------------------------------------------------------------------------
+
+if [ $# -ne 3 ]; then
+    echo "Usage: $0 num1 num2 num3"
+    exit 1
+fi
+
+a=$1
+b=$2
+c=$3
+
+if (( a >= b && a >= c )); then
+    echo "Largest: $a"
+elif (( b >= c )); then
+    echo "Largest: $b"
+else
+    echo "Largest: $c"
+fi
+---------------------------------------------------------------------------
+echo "Enter a character:"
+read char
+
+if [ ${#char} -ne 1 ]; then
+    echo "You have entered more than one character."
+elif [[ $char =~ [a-z] ]]; then
+    echo "You entered a lower case alphabet"
+elif [[ $char =~ [A-Z] ]]; then
+    echo "You entered an upper case alphabet"
+elif [[ $char =~ [0-9] ]]; then
+    echo "You have entered a digit"
+else
+    echo "You have entered a special symbol"
+fi
+
+---------------------------------------------
+
+echo "Enter a day:"
+read day
+
+case "$day" in
+    Monday)    echo "DOS class: 10:00 AM - Room 101" ;;
+    Tuesday)   echo "DOS class: 11:30 AM - Room 102" ;;
+    Wednesday) echo "DOS class: 09:00 AM - Room 103" ;;
+    Thursday)  echo "DOS class: 02:00 PM - Room 104" ;;
+    Friday)    echo "DOS class: 03:30 PM - Room 105" ;;
+    Saturday)  echo "No class on Saturday" ;;
+    Sunday)    echo "Holiday" ;;
+    *)         echo "Invalid day" ;;
+esac
+
+
