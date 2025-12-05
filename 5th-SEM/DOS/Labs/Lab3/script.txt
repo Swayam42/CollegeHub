@@ -1,3 +1,16 @@
+echo "Enter first num :"
+read num1
+echo "Enter sec num :"
+read num2
+sum=$((num1+num2))
+sub=$((num1-num2))
+mul=$((num1*num2))
+div=$((num1/num2))
+echo "Sum of $num1 and $num2 is $sub"
+echo "Subtraction of $num1 and $num2 is $sum"
+echo "Multiplication of $num1 and $num2 is $mul"
+echo "Division of $num1 by $num2 is $div"
+--------------------------------------------------------------------------------------------
 echo "Enter first float num: "
 read a 
 echo "Enter sec float num: "
@@ -27,14 +40,20 @@ echo "House Rent Allowance: $hra"
 echo "Gross Salary: $gross"
 
 ----------------------------------------------------------------------------------------------------------
+declare -A seen
 even=0
 odd=0
 
-echo "Enter 10 numbers:"
-
+echo "Enter 10 unique numbers:"
 for ((i=1; i<=10; i++))
 do
     read num
+    if [[ ${seen[$num]} ]]; then
+        echo "Duplicate '$num' ignored"
+        continue
+    fi
+    seen[$num]=1
+
     if (( num % 2 == 0 ))
     then
         ((even++))
@@ -43,8 +62,8 @@ do
     fi
 done
 
-echo "Total even numbers: $even"
-echo "Total odd numbers: $odd"
+echo "Total unique even numbers: $even"
+echo "Total unique odd numbers: $odd"
 ------------------------------------------------------------------------------
 
 echo "Enter cost price:"
