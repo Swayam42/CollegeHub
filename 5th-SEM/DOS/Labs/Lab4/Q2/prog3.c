@@ -8,11 +8,11 @@ int main(){
 	pid=fork();
 	i=i+1;
 	if(pid==0){
-		printf("Child: %d",i);	
+		printf("Child: %d\n",i);	
 	}
 	else{
 		wait(NULL);
-		printf("Parent: %d",i);
+		printf("Parent: %d\n",i);
 	}
 	return 0;
 
