@@ -1,0 +1,321 @@
+🧪 EXPERIMENT 4 – INTER-NETWORK COMMUNICATION
+
+Aim
+To implement and analyze inter-network communication between multiple LANs using:
+A single router
+
+
+Two routers
+ in Cisco Packet Tracer and verify connectivity using ping and tracert commands.
+
+
+
+
+
+Important Terms (Understand Before Starting)
+LAN: Local Area Network (same IP network)
+
+
+Inter-network communication: Communication between different IP networks
+
+
+Router: Connects different networks
+
+
+Default Gateway: Router IP used by a PC to reach other networks
+
+
+Ping: Checks connectivity
+
+
+Tracert: Shows path taken by packets
+
+
+
+🔵 PART A: INTER-NETWORK COMMUNICATION USING SINGLE ROUTER
+(First image you uploaded)
+
+Network Design (as per diagram)
+LAN 1
+Network: 192.168.1.0/24
+
+
+PCs:
+
+
+PC0 → 192.168.1.10
+
+
+PC1 → 192.168.1.11
+
+
+Router Interface:
+
+
+G0/0 → 192.168.1.1
+
+
+LAN 2
+Network: 172.168.1.0/24
+
+
+PCs:
+
+
+PC2 → 172.168.1.10
+
+
+PC3 → 172.168.1.11
+
+
+Router Interface:
+
+
+G0/1 → 172.168.1.1
+
+
+
+STEP 1: CREATE TOPOLOGY
+Open Cisco Packet Tracer
+
+
+Drag:
+
+
+1 Router (2911 / 2901)
+
+
+2 Switches (2960)
+
+
+4 PCs
+
+
+Connect using Copper Straight-Through cables:
+
+
+PC0, PC1 → Switch0
+
+
+Switch0 → Router (G0/0)
+
+
+PC2, PC3 → Switch1
+
+
+Switch1 → Router (G0/1)
+
+
+Wait until all links turn green.
+
+STEP 2: CONFIGURE ROUTER INTERFACES
+Click Router → CLI
+enable
+configure terminal
+
+interface gigabitEthernet0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+
+interface gigabitEthernet0/1
+ip address 172.168.1.1 255.255.255.0
+no shutdown
+exit
+
+📌 Why?
+Each interface belongs to a different LAN
+
+
+Router now knows both networks
+
+
+
+STEP 3: CONFIGURE PCs
+PC0
+IP: 192.168.1.10
+
+
+Mask: 255.255.255.0
+
+
+Gateway: 192.168.1.1
+
+
+PC1
+IP: 192.168.1.11
+
+
+Gateway: 192.168.1.1
+
+
+PC2
+IP: 172.168.1.10
+
+
+Gateway: 172.168.1.1
+
+
+PC3
+IP: 172.168.1.11
+
+
+Gateway: 172.168.1.1
+
+
+📌 Gateway is mandatory for inter-network communication.
+
+STEP 4: VERIFY CONNECTIVITY
+Ping Test
+From PC0:
+ping 172.168.1.10
+ping 172.168.1.11
+
+✔ Replies received → Inter-LAN communication successful
+
+Tracert Test
+From PC0:
+tracert 172.168.1.10
+
+✔ Shows one hop (the router)
+
+Observation (Single Router)
+Router directly connects both networks
+
+
+No routing protocol required
+
+
+Simple and efficient for small networks
+
+
+
+🟢 PART B: INTER-NETWORK COMMUNICATION USING TWO ROUTERS
+(Second image you uploaded)
+
+Network Design (as per diagram)
+LAN 1
+Network: 192.168.1.0/24
+
+
+Router0 G0/0 → 192.168.1.1
+
+
+LAN 2
+Network: 172.168.1.0/24
+
+
+Router1 G0/0 → 172.168.1.1
+
+
+Inter-Router Network
+Network: 10.0.0.0/30
+
+
+Router0 G0/1 → 10.0.0.1
+
+
+Router1 G0/1 → 10.0.0.2
+
+
+
+STEP 1: CREATE TOPOLOGY
+Drag:
+
+
+2 Routers
+
+
+2 Switches
+
+
+4 PCs
+
+
+Connect:
+
+
+LAN 1 PCs → Switch0 → Router0
+
+
+LAN 2 PCs → Switch1 → Router1
+
+
+Router0 G0/1 ↔ Router1 G0/1
+
+
+
+STEP 2: CONFIGURE ROUTER0
+enable
+configure terminal
+
+interface gigabitEthernet0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+
+interface gigabitEthernet0/1
+ip address 10.0.0.1 255.255.255.252
+no shutdown
+exit
+
+
+STEP 3: CONFIGURE ROUTER1
+enable
+configure terminal
+
+interface gigabitEthernet0/0
+ip address 172.168.1.1 255.255.255.0
+no shutdown
+exit
+
+interface gigabitEthernet0/1
+ip address 10.0.0.2 255.255.255.252
+no shutdown
+exit
+
+
+STEP 4: CONFIGURE STATIC ROUTING
+On Router0
+ip route 172.168.1.0 255.255.255.0 10.0.0.2
+
+On Router1
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+
+📌 Why?
+Routers must know where the other LAN is
+
+
+Static routes tell the path
+
+
+
+STEP 5: CONFIGURE PCs
+Same as Part A:
+LAN 1 PCs → gateway 192.168.1.1
+
+
+LAN 2 PCs → gateway 172.168.1.1
+
+
+
+STEP 6: VERIFY CONNECTIVITY
+Ping Test
+From PC0:
+ping 172.168.1.10
+
+✔ Success
+
+Tracert Test
+tracert 172.168.1.10
+
+✔ Shows two hops (Router0 → Router1)
+
+Observation (Two Routers)
+Multiple routers used
+
+
+Static routing required
+
+
+More scalable for large networks

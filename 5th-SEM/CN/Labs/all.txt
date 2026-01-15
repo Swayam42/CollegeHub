@@ -1,0 +1,237 @@
+EXPERIMENT – 2
+Title
+
+Implementation of Basic Ethernet and Analysis of IP, TCP, and UDP Headers using Cisco Packet Tracer
+
+Aim
+
+To implement a basic Ethernet LAN using Cisco Packet Tracer and analyze Ethernet, IP, TCP, and UDP headers by simulating ICMP, TCP (HTTP), and UDP (TFTP) traffic.
+
+Objectives
+
+To understand Ethernet, IP, TCP, and UDP headers.
+
+To configure a basic Ethernet LAN using Cisco Packet Tracer.
+
+To simulate ICMP, TCP, and UDP traffic between end devices.
+
+To analyze different fields of IP, TCP, and UDP headers using Simulation Mode.
+
+Software Required
+
+Cisco Packet Tracer
+
+PART A: BUILDING THE ETHERNET LAN
+Step A1: Launch Cisco Packet Tracer
+
+Open Cisco Packet Tracer
+
+Switch to Logical Workspace
+
+Step A2: Add Network Devices
+
+Drag the following devices into the workspace:
+
+2 PCs → PC0, PC1
+
+1 Switch → 2960 Switch
+
+Step A3: Connect Devices
+
+Use Copper Straight-Through Cable:
+
+PC0 → Switch Fa0/1
+
+PC1 → Switch Fa0/2
+
+✔ Ensure green lights appear on connections
+
+PART B: CONFIGURING IP ADDRESSES
+Step B1: Configure IP on PC0
+
+Click PC0
+
+Desktop → IP Configuration
+
+Enter:
+
+IP Address: 192.168.1.10
+
+Subnet Mask: 255.255.255.0
+
+Default Gateway: (leave blank)
+
+Step B2: Configure IP on PC1
+
+Click PC1
+
+Desktop → IP Configuration
+
+Enter:
+
+IP Address: 192.168.1.20
+
+Subnet Mask: 255.255.255.0
+
+PART C: GENERATING NETWORK TRAFFIC
+Step C1: ICMP Traffic (Ping Test)
+Purpose:
+
+To generate ICMP packets encapsulated in IP and Ethernet frames
+
+Steps:
+
+Click PC0
+
+Desktop → Command Prompt
+
+Run:
+
+ping 192.168.1.20
+
+Expected Result:
+
+Successful replies from PC1
+
+ICMP traffic generated
+
+Step C2: TCP Traffic (HTTP)
+Purpose:
+
+To generate TCP packets for header analysis
+
+Steps:
+
+Add Server device to topology
+
+Connect Server → Switch using Copper Straight-Through
+
+Configure Server IP:
+
+IP: 192.168.1.30
+
+Subnet Mask: 255.255.255.0
+
+Go to Server → Services → HTTP
+
+Turn HTTP = ON
+
+On PC0:
+
+Desktop → Web Browser
+
+Enter URL:
+
+http://192.168.1.30
+
+
+✔ This generates TCP traffic (Port 80)
+
+Step C3: UDP Traffic (TFTP – Optional)
+
+Enable TFTP service on Server
+
+Used for UDP header analysis
+
+PART D: CAPTURING & ANALYZING PACKETS
+Step D1: Switch to Simulation Mode
+
+Click Simulation (bottom-right corner)
+
+Step D2: Generate Packet
+
+Click Add Simple PDU OR
+
+Use Capture / Forward
+
+Step D3: Open PDU Details
+
+Click any packet in Event List
+
+Select PDU Details
+
+Open:
+
+Inbound PDU Details
+
+Outbound PDU Details
+
+Step D4: Analyze Headers
+Ethernet II Header
+
+Destination MAC
+
+Source MAC
+
+Type (IPv4 – 0x0800)
+
+IP Header
+
+Version (IPv4)
+
+Header Length
+
+Source IP
+
+Destination IP
+
+TTL
+
+Protocol:
+
+1 → ICMP
+
+6 → TCP
+
+17 → UDP
+
+TCP Header (HTTP)
+
+Source Port (Ephemeral, e.g., 1025)
+
+Destination Port (80)
+
+Sequence Number
+
+Acknowledgement Number
+
+Flags (SYN, ACK)
+
+Window Size
+
+UDP Header (TFTP)
+
+Source Port
+
+Destination Port
+
+Length
+
+Checksum
+
+PART E: TESTING & VERIFICATION
+Ping Test
+ping 192.168.1.20
+
+
+✔ Confirms Layer 3 connectivity
+
+HTTP Test
+
+Browser page loads successfully
+✔ Confirms TCP communication
+
+Simulation Validation
+
+Ethernet → IP → TCP/UDP encapsulation visible
+✔ Confirms correct packet flow
+
+OBSERVATION TABLE (FORMAT)
+Layer	Field	Sample Value
+Ethernet	Source MAC	00:0C:29:65:43:21
+Ethernet	Destination MAC	00:0C:29:12:34:56
+IP	Source IP	192.168.1.10
+IP	Destination IP	192.168.1.20
+IP	Protocol	1 (ICMP) / 6 (TCP)
+TCP	Source Port	1025
+TCP	Destination Port	80
