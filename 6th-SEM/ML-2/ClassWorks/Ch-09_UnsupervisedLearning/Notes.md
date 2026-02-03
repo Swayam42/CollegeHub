@@ -72,10 +72,6 @@ flowchart LR
     B --> C3[Cluster 3]
     B --> C4[Cluster N]
     
-    style C1 fill:#ff6b6b
-    style C2 fill:#4ecdc4
-    style C3 fill:#ffe66d
-    style C4 fill:#a8dadc
 ```
 
 ---
@@ -103,12 +99,6 @@ flowchart TD
     D --> E2[Cluster 2:<br/>Computer Science Papers]
     D --> E3[Cluster 3:<br/>Machine Learning Papers]
     
-    style A fill:#e1f5ff
-    style C fill:#fff4e6
-    style D fill:#f0f0f0
-    style E1 fill:#d4edda
-    style E2 fill:#d1ecf1
-    style E3 fill:#f8d7da
 ```
 
 ---
@@ -228,15 +218,39 @@ graph LR
 
 
 ---
-###Strengths and Weakness Of K-Means
-Strengths : simple and easy to implement
-            fast and efficient for large datasets
-Weakness : 
+
+## Strengths and Weaknesses of K-Means
+
+### Strengths
+- **Simple and Easy to Implement**: Straightforward algorithm with minimal complexity
+- **Fast and Efficient for Large Datasets**: Computationally efficient with linear time complexity
+- **Scales Well with Number of Samples**: Can handle millions of data points effectively
+- **Guarantees Convergence**: Algorithm always converges to a stable solution
+- **Works Well with Spherical Clusters**: Performs excellently when clusters are roughly circular/spherical
+- **Easy to Interpret Results**: Clear cluster assignments make results easy to understand and visualize
+
+### Weaknesses
+- **Sensitive to Outliers**: Extreme values can significantly distort cluster centroids
+- **Assumes Spherical Clusters**: Struggles with non-spherical or irregular cluster shapes
+- **Difficulty with Varying Cluster Sizes**: Tends to create equal-sized clusters even when natural clusters differ
+- **Difficulty with Varying Densities**: Cannot handle clusters with different densities well
+- **Need to Specify K in Advance**: Requires prior knowledge or estimation of number of clusters
+- **May Converge to Local Optimum**: Different initializations can produce different final results
+
 ---
----
-drawbacks of K-Means and remedies
-sensitive to initial centroids -use KMeans++ initialisation
-requires predefined K- use methods like Elbow Method to choose K
+
+## Drawbacks of K-Means and Remedies
+
+| Drawback | Remedy |
+|----------|--------|
+| **Sensitive to Initial Centroids** | Use **K-Means++ Initialization** for better starting centroids |
+| **Requires Predefined K** | Use methods like **Elbow Method** or **Silhouette Score** to choose optimal K |
+| **Sensitive to Outliers** | Use **K-Medoids (PAM)** algorithm or perform outlier detection and removal preprocessing |
+| **Assumes Spherical Clusters** | Use **DBSCAN** or **Hierarchical Clustering** for arbitrary shaped clusters |
+| **Handles Only Numerical Data** | Use **K-Modes** for categorical data or **K-Prototypes** for mixed data types |
+| **May Converge to Local Optima** | Run algorithm **multiple times** with different random initializations and select best result |
+| **Difficulty with Varying Cluster Sizes** | Use **Expectation-Maximization (EM)** algorithm or density-based methods |
+| **Poor Performance with High Dimensions** | Apply **dimensionality reduction** techniques (PCA, t-SNE) before clustering |
 
 ---
 
