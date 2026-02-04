@@ -256,8 +256,335 @@ graph LR
 
 ---
 
+## Within Cluster Homogeneity and Heterogeneity
+
+### Concepts
+- **Within Cluster Homogeneity**: Similarity within the cluster (how alike data points are within the same cluster)
+- **Within Cluster Heterogeneity**: Dissimilarity between data points within the cluster (how different data points are within the same cluster)
+
+### Goal of Clustering
+- **Reduce Heterogeneity** → Data points within a cluster should be as different as possible from each other is NOT the goal
+- **Increase Homogeneity** → Data points within a cluster should be as similar as possible to each other
+
+---
+
+## Choosing Appropriate Number of Clusters (K)
+
+There is **no fixed formula** to determine the number of clusters (K).
+
+### Rule of Thumb (Small Datasets)
+For small datasets, a commonly followed rule is:
+
+$$K = \sqrt{\frac{n}{2}}$$
+
+where $n$ = number of data points
+
+### For Large Datasets
+Several **statistical methods** are used to determine suitable number of clusters:
+- Elbow Method
+- Silhouette Score
+- Gap Statistic
+- Davies-Bouldin Index
+
+---
+
+## Elbow Method
+
+The **Elbow Method** determines the optimal number of clusters (K) by analyzing the trade-off between model complexity and performance.
+
+### Concept
+- **Less K** → **Underfitting** (too few clusters, high error)
+- **More K** → **Overfitting** (too many clusters, diminishing returns)
+
+### How It Works
+Measures the **homogeneity/heterogeneity** within clusters for different K values.
+
+**As K Increases:**
+- Homogeneity **increases** (points are closer to their centroids)
+- Heterogeneity **decreases** (clusters are tighter)
+- Beyond a certain K, further increase gives **diminishing returns**
+
+### Finding the Optimal K
+The **elbow point** is where the rate of decrease in error sharply slows down, indicating the optimal K.
+
+### Visualization
+
+![Elbow Method Diagram](assets/elbow_method.png)
+
+*The graph shows SSE (Sum of Squared Errors) vs K. The "elbow" at K=3 indicates the optimal number of clusters.*
+
+---
+
+## Choosing Initial Centroids
+
+Proper selection of **initial centroids** is crucial for K-Means clustering effectiveness.
+
+### Problems with Random Selection
+- May lead to higher **SSE (Sum of Squared Errors)**
+- Results in **sub-optimal clusters**
+- Repeated runs may not always find optimal clusters due to data spread
+
+### Better Approaches
+
+#### 1. Hierarchical Clustering Initialization
+- Apply **hierarchical clustering** on a sample to get K clusters
+- Use the **centroids of these clusters** as initial centroids
+- Useful for small datasets or when K is small compared to the data points
+
+#### 2. Advanced Methods
+- **K-Means++**: Smart initialization algorithm that spreads out initial centroids
+- **Bisecting K-Means**: Hierarchical approach to K-Means
+- **Post-processing Refinements**: Improve centroid selection and reduce SSE
+
+---
+
+## Iterative Steps and SSE (Sum of Squared Errors)
+
+### Iterative Process
+K-Means **iteratively recomputes centroids** to minimize distances within clusters.
+
+### Distance Measurement
+**Euclidean Distance** is used to measure the proximity of data points to centroids:
+
+$$\text{dist}(x, c) = \sqrt{\sum_{i=1}^{n}(x_i - c_i)^2}$$
+
+where:
+- $x$ = data point
+- $c$ = centroid
+- $n$ = number of features
+
+### Quality Measurement: SSE
+The quality of clustering is measured using **SSE (Sum of Squared Errors)**:
+
+$$\text{SSE} = \sum_{k=1}^{K} \sum_{x \in C_k} \text{dist}(x, c_k)^2$$
+
+where:
+- $K$ = number of clusters
+- $C_k$ = cluster $k$
+- $c_k$ = centroid of cluster $k$
+- $x$ = data point in cluster $C_k$
+
+### Key Points
+- **Lower SSE** indicates better centroid positioning
+- Centroid minimizing SSE is the **mean** of cluster points
+- **Limitation**: SSE is **sensitive to outliers**
+
+### Factors Affecting K-Means Outcome
+1. **Initial random selection of centroids**
+2. **Number of clusters (K)**
+
+### Improving Reliability
+- Run K-Means **multiple times** with different initial centroids
+- **Vary K** and use elbow method or other metrics
+- Clustering is often used **before classification** to identify subgroups in unlabeled data
+
+---
+
+## Complexity of K-Means Algorithm
+
+### Time Complexity
+
+$$O(nKt)$$
+
+where:
+- $n$ = total number of data points/objects in dataset
+- $K$ = number of clusters
+- $t$ = number of iterations
+
+### Scalability
+- Normally, $K$ and $t$ are **much smaller than** $n$
+- Therefore, K-Means is **scalable and efficient** for processing large datasets
+
+---
+
+## Observations on K-Means
+
+1. **Voronoi Boundaries**: Help visualize the cluster regions and decision boundaries between clusters
+2. **Initial Centroid Dependency**: Final clusters depend heavily on initial centroid selection
+3. **Multiple Runs**: Running with different centroids can improve global clustering results
+4. **Practical Application**: Example - Software Defect Clustering for bug classification
+
+### Visualization of Voronoi Boundaries
+
+![Voronoi Boundaries](assets/voronoi_boundaries.png)
+
+*The diagram shows four clusters (C1, C2, C3, C4) with Voronoi boundaries separating them. Each region represents all points closest to that cluster's centroid.*
+
+---
+
+## Problem with K-Means: Sensitivity to Outliers
+
+### Example: Why K-Medoid is Better Than K-Means
+
+**Dataset (1D):** `[1, 2, 3, 5, 9, 10, 11, 25]`
+
+- **Point 25 is an outlier** and affects cluster formation negatively when **mean** is considered as centroids
+- Let's take **K = 2** and form clusters
+
+---
+
+### K-Means Approach (Using Mean)
+
+#### Initial Random Clusters
+- **Cluster 1**: `{1, 2, 3, 5}`
+- **Cluster 2**: `{9, 10, 11, 25}`
+
+#### Calculate Centroids (Mean)
+
+**Centroid of Cluster 1:**
+$$c_1 = \frac{1 + 2 + 3 + 5}{4} = \frac{11}{4} = 2.75$$
+
+**Centroid of Cluster 2:**
+$$c_2 = \frac{9 + 10 + 11 + 25}{4} = \frac{55}{4} = 13.75$$
+
+#### Problem
+- The outlier **25** pulls the centroid of Cluster 2 to **13.75**
+- This centroid is **far from most points** in the cluster (9, 10, 11)
+- Points 9, 10, 11 are now relatively far from their own centroid due to the outlier
+- This leads to **higher SSE** and **poor cluster quality**
+
+---
+
+### K-Medoids Approach (Using Medoid)
+
+**Medoid** = An **actual data point** from the cluster that minimizes the sum of distances to all other points in the cluster
+
+#### Initial Random Clusters
+- **Cluster 1**: `{1, 2, 3, 5}`
+- **Cluster 2**: `{9, 10, 11, 25}`
+
+#### Calculate Medoids
+
+**Medoid of Cluster 1:**
+
+Test each point as potential medoid:
+- If medoid = 1: SSE = |1-1| + |2-1| + |3-1| + |5-1| = 0 + 1 + 2 + 4 = **7**
+- If medoid = 2: SSE = |1-2| + |2-2| + |3-2| + |5-2| = 1 + 0 + 1 + 3 = **5**
+- If medoid = 3: SSE = |1-3| + |2-3| + |3-3| + |5-3| = 2 + 1 + 0 + 2 = **5**
+- If medoid = 5: SSE = |1-5| + |2-5| + |3-5| + |5-5| = 4 + 3 + 2 + 0 = **9**
+
+**Medoid of Cluster 1 = 2 or 3** (let's choose **2**)
+
+**Medoid of Cluster 2:**
+
+Test each point as potential medoid:
+- If medoid = 9: SSE = |9-9| + |10-9| + |11-9| + |25-9| = 0 + 1 + 2 + 16 = **19**
+- If medoid = 10: SSE = |9-10| + |10-10| + |11-10| + |25-10| = 1 + 0 + 1 + 15 = **17**
+- If medoid = 11: SSE = |9-11| + |10-11| + |11-11| + |25-11| = 2 + 1 + 0 + 14 = **17**
+- If medoid = 25: SSE = |9-25| + |10-25| + |11-25| + |25-25| = 16 + 15 + 14 + 0 = **45**
+
+**Medoid of Cluster 2 = 10** (actual data point, not affected as much by outlier)
+
+#### Advantage
+- Medoid **10** is an actual data point
+- It's **closer to most cluster members** (9, 10, 11)
+- The outlier **25** has **less influence** because we choose an actual representative point
+- Results in **lower SSE** and **better cluster quality**
+
+---
+
+## K-Medoids: A Representative Object-Based Technique
+
+### Definition
+- Uses **actual data points** as cluster representatives (**medoids**)
+- Assigns points to the nearest medoid instead of centroid
+- **Medoid** = A member of the cluster that minimizes total distance to all other members
+
+### SSE Formula for K-Medoids
+
+$$\text{SSE} = \sum_{i=1}^{K} \sum_{x \in C_i} \text{dist}(o_i, x)^2$$
+
+where:
+- $o_i$ = medoid of cluster $C_i$
+- $x$ = data point in cluster $C_i$
+- $K$ = number of clusters
+
+---
+
+## Partitioning Around Medoids (PAM) Algorithm
+
+### Algorithm Steps
+
+1. **Initialize**: Randomly select $K$ points as initial medoids  
+2. **Assignment**: Assign each remaining point to the cluster of the nearest medoid  
+3. **Swap and Test**: For each cluster:  
+   - Randomly select a non-medoid point $o'$  
+   - **Swap** $o'$ with current medoid $o_i$ and compute new SSE  
+   - **If** $SSE_{new} < SSE_{old}$:  
+     - Keep the swap  
+     - Reassign points to nearest medoid  
+4. **Repeat** until no improvement in SSE
+
+
+### Pseudocode
+
+```
+PAM Algorithm:
+1. SELECT K random points as initial medoids
+2. REPEAT:
+     FOR each medoid o_i:
+         FOR each non-medoid point o':
+             SWAP o_i with o'
+             COMPUTE SSE_new
+             IF SSE_new < SSE_old:
+                 KEEP the swap
+                 UPDATE medoid to o'
+                 REASSIGN all points to nearest medoid
+3. UNTIL no change in medoids
+```
+
+### Time Complexity
+
+$$O(K(n-K)^2)$$
+
+where:
+- $K$ = number of medoid points
+- $n-K$ = number of non-medoid points
+
+### Advantages
+- **Robust to outliers and noise** (main advantage over K-Means)
+- Works with any distance metric
+- Medoids are actual data points, making them interpretable
+
+### Limitations
+- **Not scalable** to very large datasets
+- Requires **sample-based approaches** for large datasets
+- Higher computational cost than K-Means
+
+---
+
+## K-Means vs K-Medoids: Comparison
+
+| Aspect | K-Means | K-Medoids (PAM) |
+|--------|---------|-----------------|
+| **Cluster Representative** | Centroid (mean of points) | Medoid (actual data point) |
+| **Calculation** | Mean of all points in cluster | Actual point minimizing total distance |
+| **Outlier Sensitivity** | Highly sensitive to outliers | Robust to outliers |
+| **Cluster Shape** | Works best with spherical clusters | Can handle various shapes better |
+| **Time Complexity** | $O(nKt)$ - faster | $O(K(n-K)^2)$ - slower |
+| **Scalability** | Excellent for large datasets |  Limited for large datasets |
+| **Distance Metric** | Primarily Euclidean | Works with any distance metric |
+| **Interpretability** | Centroids may not be real points | Medoids are actual data points |
+| **Noise Handling** | Poor performance with noisy data | Better performance with noisy data |
+| **Convergence** | Always converges | Always converges |
+| **Use Case** | Large, clean datasets with spherical clusters | Small to medium datasets with outliers/noise |
+| **Memory Usage** | Lower | Higher |
+| **Implementation** | Simpler | More complex |
+
+---
+
 ## Summary
 
-Unsupervised learning, particularly clustering, is a powerful technique for discovering patterns in unlabelled data. The K-means algorithm iteratively assigns points to the nearest centroid and updates centroids until convergence, resulting in well-defined clusters that can reveal hidden structures in the data.
+This chapter covered advanced aspects of unsupervised learning:
+- Understanding cluster quality through homogeneity and heterogeneity
+- Methods to determine optimal K (Elbow Method)
+- Importance of initial centroid selection
+- SSE as a clustering quality metric
+- K-Means algorithm complexity and scalability
+- Problems with K-Means (outlier sensitivity)
+- K-Medoids as a robust alternative
+- PAM algorithm for medoid-based clustering
+
+**Key Takeaway**: While K-Means is faster and more scalable, K-Medoids provides better robustness against outliers at the cost of computational complexity.
 
 ---
