@@ -573,18 +573,464 @@ where:
 
 ---
 
-## Summary
+---
 
-This chapter covered advanced aspects of unsupervised learning:
-- Understanding cluster quality through homogeneity and heterogeneity
-- Methods to determine optimal K (Elbow Method)
-- Importance of initial centroid selection
-- SSE as a clustering quality metric
-- K-Means algorithm complexity and scalability
-- Problems with K-Means (outlier sensitivity)
-- K-Medoids as a robust alternative
-- PAM algorithm for medoid-based clustering
+## Types of Clustering Algorithms
 
-**Key Takeaway**: While K-Means is faster and more scalable, K-Medoids provides better robustness against outliers at the cost of computational complexity.
+Clustering algorithms can be broadly categorized into **three main types**:
+
+```mermaid
+flowchart TD
+    A[Clustering Algorithms] --> B[Partitioning Methods]
+    A --> C[Hierarchical Methods]
+    A --> D[Density-Based Methods]
+    
+    B --> B1[K-Means]
+    B --> B2[K-Medoids/PAM]
+    
+    C --> C1[Agglomerative<br/>Bottom-Up]
+    C --> C2[Divisive<br/>Top-Down]
+    
+    D --> D1[DBSCAN]
+```
 
 ---
+
+## Hierarchical Clustering
+
+### Definition
+Hierarchical clustering is used to group data into a **tree-like structure (hierarchy)** rather than creating fixed, flat clusters. It is particularly useful when data has **nested groups** or natural hierarchical relationships.
+
+### Applications
+- **Organizational Structures**: Organizing employees into departments, teams, and roles
+- **Taxonomy Creation**: Building biological classification systems (Kingdom → Phylum → Class → Species)
+
+---
+
+## Types of Hierarchical Clustering
+
+### 1. Agglomerative (Bottom-Up Approach)
+
+**Process:**
+- Each object starts as its **own individual cluster**
+- Clusters are **merged iteratively** based on similarity
+- Continues until all objects are in one cluster or desired number of clusters is reached
+
+**Steps:**
+1. Start: Each data point is a separate cluster
+2. Merge: Find the two closest clusters and combine them
+3. Repeat: Continue merging until termination condition is met
+
+**Example:**
+```
+Level 0: {A} {B} {C} {D} {E}     (5 clusters)
+Level 1: {AB} {C} {D} {E}        (4 clusters - A and B merged)
+Level 2: {AB} {CD} {E}           (3 clusters - C and D merged)
+Level 3: {AB} {CDE}              (2 clusters - CD and E merged)
+Level 4: {ABCDE}                 (1 cluster - all merged)
+```
+
+---
+
+### 2. Divisive (Top-Down Approach)
+
+**Process:**
+- Start with **one cluster** containing all objects
+- Iteratively **split clusters** into smaller sub-clusters
+- Continues until each object is in its own cluster or desired number is reached
+
+**Steps:**
+1. Start: All data points in one cluster
+2. Split: Divide the cluster into two sub-clusters
+3. Repeat: Continue splitting until termination condition is met
+
+**Example:**
+```
+Level 0: {ABCDE}                 (1 cluster)
+Level 1: {AB} {CDE}              (2 clusters - split into two)
+Level 2: {AB} {CD} {E}           (3 clusters - CDE split)
+Level 3: {A} {B} {CD} {E}        (4 clusters - AB split)
+Level 4: {A} {B} {C} {D} {E}     (5 clusters - all separated)
+```
+
+---
+
+## Dendrogram Representation
+
+A **dendrogram** is a tree-like diagram that shows the step-by-step creation of hierarchical clustering. It visualizes:
+- How clusters are merged (agglomerative) or split (divisive)
+- The distance/similarity at which merges/splits occur
+- The hierarchical relationship between clusters
+
+### Dendrogram Structure
+
+![Dendrogram](assets/dendrogram.png)
+
+*The dendrogram shows agglomerative clustering from bottom (individual points A, B, C, D, E) to top (all merged). The height of each merge indicates the distance between clusters.*
+
+### Key Features:
+- **Y-axis (Height)**: Represents distance or dissimilarity between clusters
+- **X-axis**: Individual data points
+- **Horizontal Lines**: Indicate cluster mergers
+- **Vertical Lines**: Connect clusters being merged
+
+### Cutting the Dendrogram:
+You can "cut" the dendrogram at any height to get a specific number of clusters:
+- Cut at **Level 2**: Get 3 clusters {AB}, {CD}, {E}
+- Cut at **Level 3**: Get 2 clusters {AB}, {CDE}
+
+---
+
+## Distance Measures Between Clusters
+
+Let $C_i$ and $C_j$ be two clusters with:
+- $n_i$ and $n_j$ = number of points in each cluster
+- $m_i$ and $m_j$ = means (centroids) of the clusters
+- $p \in C_i$ = points belonging to cluster $C_i$
+
+### 1. Single Linkage (Minimum Distance)
+
+$$D_{\text{min}}(C_i, C_j) = \min_{p \in C_i, q \in C_j} d(p, q)$$
+
+- **Definition**: Minimum distance between any two points from different clusters
+- **Characteristic**: Uses the **closest pair** of points
+
+---
+
+### 2. Complete Linkage (Maximum Distance)
+
+$$D_{\text{max}}(C_i, C_j) = \max_{p \in C_i, q \in C_j} d(p, q)$$
+
+- **Definition**: Maximum distance between any two points from different clusters
+- **Characteristic**: Uses the **farthest pair** of points
+
+---
+
+### 3. Average Linkage (Mean Distance)
+
+$$D_{\text{avg}}(C_i, C_j) = \frac{1}{n_i \times n_j} \sum_{p \in C_i} \sum_{q \in C_j} d(p, q)$$
+
+- **Definition**: Average distance between all pairs of points from different clusters
+- **Characteristic**: Considers **all pairwise distances**
+
+---
+
+### 4. Centroid Distance
+
+$$D_{\text{centroid}}(C_i, C_j) = d(m_i, m_j)$$
+
+- **Definition**: Distance between the centroids (means) of two clusters
+- **Characteristic**: Uses **cluster centers**
+
+---
+
+## Distance Visualization
+
+![Distance Measures Between Clusters](assets/linkage_methods.png)
+
+*The diagram illustrates five different distance/linkage methods for measuring similarity between clusters:*
+
+1. **Single Linkage**: Minimum distance between the closest elements in the two clusters
+2. **Complete Linkage**: Maximum distance between the farthest elements in the two clusters  
+3. **Average Linkage**: Average of all pairwise distances between elements in the clusters
+4. **Centroid Method**: Distance between the centroids (mean points) of the two clusters
+5. **Ward's Method**: Merges clusters to minimize the increase in total within-cluster variance
+
+*Each method uses a different strategy to determine which clusters should be merged during hierarchical clustering.*
+
+---
+
+## Key Points of Hierarchical Clustering
+
+### Important Characteristics:
+1. **Bottom-Up vs Top-Down**: 
+   - Agglomerative starts with individual points and merges
+   - Divisive starts with all points together and splits
+
+2. **No Swaps Allowed**: 
+   - Once clusters are merged (agglomerative) or split (divisive), the decision is **permanent**
+   - Cannot undo or reassign points later
+
+3. **Termination Conditions**:
+   - Based on **threshold distance** (stop when cluster distance exceeds threshold)
+   - Based on **number of clusters** (stop when desired K is reached)
+   - When all points are in one cluster (agglomerative)
+   - When all points are separate (divisive)
+
+4. **Dendrogram Visualization**: 
+   - Provides a complete picture of the hierarchical structure
+   - Shows all merging/splitting steps and distances
+
+5. **No Need to Specify K in Advance**: 
+   - Unlike K-Means, you can decide the number of clusters **after** seeing the dendrogram
+
+---
+
+## Distance-Based Linkage Methods
+
+### 1. Nearest Neighbor / Single Linkage
+
+**Method**: Merge clusters based on $D_{\text{min}}$ (minimum distance)
+
+**Characteristics:**
+- Uses the **closest pair** of points between clusters
+- ⚠️ **Sensitive to chaining**: Can create long, chain-like clusters
+- ⚠️ **Sensitive to outliers**: A single outlier can bridge two distinct clusters
+
+### Example:
+```
+Initial Objects:
+
+A       B       C       D       E
+
+Distance Values:
+
+<-------------------- Dmin = 3 ----------------->
+
+AB  <--- Dmin = 2 --->  CD  <--- Dmin = 1 --->  E
+
+
+Explanation:
+
+- Dmin (CD, E) = 1   ← Minimum distance
+- Dmin (AB, CD) = 2
+- Dmin (AB, E) = 3
+
+Since Dmin = 1 is the smallest,
+
+👉 Clusters CD and E will merge first.
+
+After First Merge (Next Level):
+
+AB      CDE
+```
+
+---
+
+### 2. Furthest Neighbor / Complete Linkage
+
+**Method**: Merge clusters based on $D_{\text{max}}$ (maximum distance)
+
+**Characteristics:**
+- Uses the **farthest pair** of points between clusters
+- ✅ Creates **compact, tight clusters**
+- ⚠️ **Sensitive to outliers**: Outliers can prevent natural clusters from merging
+- Better at avoiding chaining effect
+
+**Example:**
+
+```
+Dataset: A, B, C, D, E
+
+Uses maximum distance between any two points in different clusters
+
+Tends to create more balanced, spherical clusters
+Avoids elongated clusters
+```
+
+---
+
+### 3. Mean / Average Linkage
+
+**Method**: Merge clusters based on **average of** $D_{\text{min}}$ **and** $D_{\text{max}}$
+
+**Characteristics:**
+- Provides a **balanced approach** between single and complete linkage
+- ✅ **More stable** and less sensitive to outliers
+- ✅ Works well in most practical scenarios
+- Considers all pairwise distances, not just extremes
+
+**Why it's better:**
+- Single linkage (Dmin) can cause chaining
+- Complete linkage (Dmax) can be too strict
+- Average linkage provides a **middle ground**
+
+---
+
+## Comparison of Linkage Methods
+
+| Linkage Type | Distance Used | Advantages | Disadvantages | Best For |
+|--------------|--------------|------------|---------------|----------|
+| **Single (Minimum)** | $D_{\text{min}}$ | Simple; Can find non-spherical clusters | Chaining effect; Sensitive to noise/outliers | Non-spherical, well-separated clusters |
+| **Complete (Maximum)** | $D_{\text{max}}$ | Compact clusters; Avoids chaining | Sensitive to outliers; May break natural clusters | Spherical, compact clusters |
+| **Average (Mean)** | $D_{\text{avg}}$ | Balanced; Less sensitive to outliers | Moderate computational cost | General-purpose clustering |
+| **Centroid** | $D_{\text{centroid}}$ | Intuitive; Fast computation | Can produce inversions in dendrogram | Large datasets with clear centroids |
+
+---
+
+## Density-Based Methods: DBSCAN
+
+### Motivation
+
+When using **partitioning** (K-Means) and **hierarchical clustering** methods, the resulting clusters are usually **spherical** (circular/ball-shaped).
+
+**Problem:** These methods **fail to capture arbitrarily shaped clusters**, such as:
+- S-shaped clusters
+- Crescent-shaped clusters
+- Clusters with irregular boundaries
+- Clusters of varying densities
+
+### Solution: Density-Based Clustering
+
+The **density-based clustering approach** addresses this issue by:
+- Identifying **dense regions** (areas with many points close together)
+- Identifying **sparse regions** (areas with few scattered points)
+- Forming clusters by connecting high-density regions
+- Treating low-density regions as **noise** or **outliers**
+
+---
+
+## DBSCAN Algorithm
+
+**DBSCAN** = **D**ensity-**B**ased **S**patial **C**lustering of **A**pplications with **N**oise
+
+### Definition
+DBSCAN is a popular density-based algorithm that forms clusters by connecting regions with **high point density** and labels isolated points in low-density regions as **noise/outliers**.
+
+---
+
+### Key Concepts
+
+#### 1. **Eps (ε) - Epsilon**
+- Radius of the neighborhood around a point
+- Defines how close points need to be to be considered "neighbors"
+
+#### 2. **MinPts - Minimum Points**
+- Minimum number of points required to form a dense region
+- If a neighborhood has ≥ MinPts, it's considered dense
+
+#### 3. **Point Types**
+
+**Core Point:**
+- A point with **at least MinPts** points within its Eps radius (including itself)
+- Forms the "center" of a cluster
+
+**Border Point:**
+- A point within the Eps radius of a core point
+- Has **fewer than MinPts** in its own neighborhood
+- Part of a cluster but not at its core
+
+**Noise Point (Outlier):**
+- Not a core point
+- Not within Eps radius of any core point
+- Does not belong to any cluster
+
+---
+
+### DBSCAN Algorithm Steps
+
+```
+DBSCAN(D, Eps, MinPts):
+1. Mark all points as unvisited
+2. FOR each unvisited point p in dataset D:
+     a. Mark p as visited
+     b. Find all neighbors of p within Eps radius
+     c. IF neighbors < MinPts:
+           Mark p as NOISE
+        ELSE:
+           Create new cluster C
+           Add p to cluster C (p is a core point)
+           FOR each neighbor point q:
+               IF q is unvisited:
+                  Mark q as visited
+                  Find neighbors of q within Eps
+                  IF neighbors of q >= MinPts:
+                     Add q's neighbors to expansion list
+               IF q is not in any cluster:
+                  Add q to cluster C
+3. Return all clusters
+```
+
+---
+
+### DBSCAN Example
+
+**Parameters:**
+- Eps = 1.5
+- MinPts = 3
+
+**Dataset Visualization:**
+
+```
+Given points in 2D space:
+Dense region 1: Points close together (will form Cluster 1)
+Dense region 2: Points close together (will form Cluster 2)
+Isolated points: Far from any dense region (marked as noise)
+```
+
+**Process:**
+1. **Identify Core Points**: Points with ≥ 3 neighbors within radius 1.5
+2. **Expand Clusters**: Connect core points and their neighbors
+3. **Mark Border Points**: Points within radius of core points but not core themselves
+4. **Identify Noise**: Remaining isolated points
+
+---
+
+### DBSCAN Visualization
+
+![DBSCAN Clustering](assets/dbscan.jpeg)
+
+
+---
+
+## Advantages and Disadvantages of DBSCAN
+
+### Advantages ✅
+- **Discovers arbitrary-shaped clusters**: Can find non-spherical, complex cluster shapes
+- **No need to specify K**: Unlike K-Means, doesn't require number of clusters in advance
+- **Robust to outliers**: Automatically identifies and ignores noise points
+- **Handles varying densities**: Can find clusters of different shapes and sizes
+- **Single scan of database**: Efficient for large datasets
+
+### Disadvantages ❌
+- **Sensitive to parameters**: Choosing Eps and MinPts can be challenging
+- **Difficulty with varying densities**: Struggles when clusters have very different densities
+- **High-dimensional data**: Performance degrades in high-dimensional spaces (curse of dimensionality)
+- **Border point ambiguity**: Border points can be assigned to different clusters depending on processing order
+- **Memory intensive**: Needs to store distance matrix for large datasets
+
+---
+
+## Comparison: Partitioning vs Hierarchical vs Density-Based
+
+| Aspect | Partitioning<br/>(K-Means, K-Medoids) | Hierarchical<br/>(Agglomerative, Divisive) | Density-Based<br/>(DBSCAN) |
+|--------|--------------------------------------|-------------------------------------------|---------------------------|
+| **Cluster Shape** | Spherical only | Spherical preferred | Arbitrary shapes ✅ |
+| **Number of Clusters** | Must specify K | Can choose after viewing dendrogram | Automatic discovery ✅ |
+| **Outlier Handling** | Assigns all points to clusters | Assigns all points to clusters | Identifies outliers ✅ |
+| **Computational Cost** | Low: O(nKt) | High: O(n²log n) | Moderate: O(n log n) |
+| **Result Visualization** | Scatter plot | Dendrogram tree | Scatter plot with noise |
+| **Deterministic** | No (random initialization) | Yes | Yes (with fixed order) |
+| **Scalability** | Excellent ✅ | Poor for large data | Good |
+| **Best Use Case** | Large, spherical clusters | Hierarchical relationships | Arbitrary shapes, noise detection |
+
+---
+
+## When to Use Which Clustering Method?
+
+### Use **K-Means** when:
+- ✅ Clusters are roughly spherical
+- ✅ Number of clusters is known
+- ✅ Working with very large datasets
+- ✅ Speed is critical
+
+### Use **K-Medoids** when:
+- ✅ Data contains outliers
+- ✅ Need actual data points as representatives
+- ✅ Using non-Euclidean distance metrics
+- ✅ Dataset is small to medium-sized
+
+### Use **Hierarchical Clustering** when:
+- ✅ Need to understand data hierarchy
+- ✅ Don't know the number of clusters in advance
+- ✅ Want to visualize cluster relationships
+- ✅ Dataset is small (due to computational cost)
+
+### Use **DBSCAN** when:
+- ✅ Clusters have arbitrary shapes
+- ✅ Data contains noise and outliers
+- ✅ Don't know the number of clusters
+- ✅ Clusters have similar density
+
+---
+
