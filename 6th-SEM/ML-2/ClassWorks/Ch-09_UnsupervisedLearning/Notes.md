@@ -968,7 +968,7 @@ Isolated points: Far from any dense region (marked as noise)
 
 ### DBSCAN Visualization
 
-![DBSCAN Clustering](assets/dbscan.jpeg)
+![DBSCAN Clustering](assets/dbscan.jpg)
 
 
 ---
