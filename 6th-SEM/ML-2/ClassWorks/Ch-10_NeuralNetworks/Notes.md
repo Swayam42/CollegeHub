@@ -40,11 +40,7 @@ flowchart LR
     A[Input Layer] --> B[Hidden Layer 1]
     B --> C[Hidden Layer 2]
     C --> D[Output Layer]
-    
-    style A fill:#e1f5ff
-    style B fill:#fff4e6
-    style C fill:#fff4e6
-    style D fill:#d4edda
+
 ```
 
 ---
