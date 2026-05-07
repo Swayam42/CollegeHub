@@ -1,18 +1,16 @@
-#pragma once
+#ifndef PLAYERCAR_H
+#define PLAYERCAR_H
 
 #include "Car.h"
-#include <vector>
 
-class PlayerCar : public Car {
-private:
-    std::size_t m_LaneIndex;
-
+class PlayerCar : public Car
+{
 public:
-    PlayerCar(float width, float height, float speed);
+    PlayerCar();
 
-    void moveLeft();
-    void moveRight(std::size_t laneCount);
+    void handleInput();
 
-    void setLane(std::size_t laneIndex, const std::vector<float>& laneCenters, float y);
-    std::size_t getLaneIndex() const;
+    void update(float speed) override;
 };
+
+#endif

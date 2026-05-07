@@ -1,280 +1,173 @@
 #include <SFML/Graphics.hpp>
-#include <algorithm>
-#include <random>
-#include <sstream>
+#include <SFML/Audio.hpp>
+#include <iostream>
 #include <vector>
-
-#include "EnemyCar.h"
+#include <ctime>
 #include "PlayerCar.h"
+#include "EnemyCar.h"
 
-enum class GameState {
-    MENU,
-    PLAYING,
-    PAUSED,
-    GAME_OVER
-};
+using namespace sf;
+using namespace std;
 
-enum class Difficulty {
-    EASY,
-    MEDIUM,
-    HARD
-};
+const int WIDTH = 800, HEIGHT = 700;
 
-struct DifficultyConfig {
-    float initialSpawnInterval;
-    float minSpawnInterval;
-    float spawnDecay;
-    float randomSpeedMin;
-    float randomSpeedMax;
-};
+enum GameState{MENU,PLAYING,PAUSED,GAMEOVER};
 
-static DifficultyConfig getConfig(Difficulty difficulty)
-{
-    switch (difficulty) {
-    case Difficulty::EASY:
-        return {1.15f, 0.52f, 0.03f, 0.85f, 1.15f};
-    case Difficulty::MEDIUM:
-        return {0.95f, 0.40f, 0.045f, 0.80f, 1.30f};
-    case Difficulty::HARD:
-    default:
-        return {0.78f, 0.30f, 0.06f, 0.75f, 1.50f};
-    }
-}
+int main(){
+    srand(time(0));
 
-static void updateHud(sf::Text& hudText, bool fontLoaded, int score, int dodgedCars,
-                      float speedLevel, float baseEnemySpeed)
-{
-    if (!fontLoaded) {
-        return;
-    }
-
-    std::ostringstream ss;
-    ss << "Score: " << score
-       << "   Dodged: " << dodgedCars
-       << "   Level: " << static_cast<int>(speedLevel)
-       << "   Speed: " << static_cast<int>(baseEnemySpeed * speedLevel);
-    hudText.setString(ss.str());
-}
-
-int main()
-{
-    const unsigned int windowWidth = 800U;
-    const unsigned int windowHeight = 600U;
-    const float windowHeightF = static_cast<float>(windowHeight);
-
-    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Car Dodging Game");
+    RenderWindow window(VideoMode(WIDTH,HEIGHT),"Car Dodging Game");
     window.setFramerateLimit(60);
 
-    sf::Clock clock;
-    GameState state = GameState::MENU;
-    Difficulty difficulty = Difficulty::MEDIUM;
+    Font font;
+    font.loadFromFile("assets/font/KOMIKAP_.ttf");
 
-    sf::RectangleShape road(sf::Vector2f(420.f, windowHeightF));
-    road.setFillColor(sf::Color(45, 45, 45));
-    road.setPosition(190.f, 0.f);
+    Text scoreText,speedText,infoText;
 
-    std::vector<float> laneCenters;
-    laneCenters.reserve(3);
-    const float left = road.getPosition().x;
-    const float laneWidth = road.getSize().x / 3.f;
-    for (int i = 0; i < 3; ++i) {
-        laneCenters.push_back(left + laneWidth * (i + 0.5f));
-    }
+    scoreText.setFont(font);
+    scoreText.setCharacterSize(30);
+    scoreText.setFillColor(Color::White);
+    scoreText.setPosition(40,20);
 
-    PlayerCar player(42.f, 80.f, 0.f);
-    player.setLane(1, laneCenters, 520.f);
+    speedText.setFont(font);
+    speedText.setCharacterSize(30);
+    speedText.setFillColor(Color::White);
+    speedText.setPosition(550,20);
 
-    std::vector<EnemyCar> enemies;
-    std::random_device randomDevice;
-    std::mt19937 rng(randomDevice());
+    infoText.setFont(font);
+    infoText.setCharacterSize(40);
+    infoText.setFillColor(Color::White);
 
-    float totalTime = 0.f;
-    float spawnTimer = 0.f;
-    float speedLevel = 1.f;
-    const float baseEnemySpeed = 180.f;
+    Music bgMusic;
+    bgMusic.openFromFile("assets/audio/bg_music.ogg");
+    bgMusic.setLoop(true);
+    bgMusic.play();
 
-    int score = 0;
-    int dodgedCars = 0;
+    SoundBuffer crashBuffer;
+    crashBuffer.loadFromFile("assets/audio/crash.wav");
 
-    sf::Font font;
-    const bool fontLoaded = font.loadFromFile("assets/font/KOMIKAP_.ttf") ||
-                            font.loadFromFile("assets/arial.ttf");
+    Sound crashSound;
+    crashSound.setBuffer(crashBuffer);
 
-    sf::Text hudText;
-    sf::Text messageText;
-    if (fontLoaded) {
-        hudText.setFont(font);
-        hudText.setCharacterSize(20);
-        hudText.setFillColor(sf::Color::White);
-        hudText.setPosition(20.f, 16.f);
+    PlayerCar player;
+    vector<EnemyCar> enemies;
+    vector<float> lanes={280,400,520};
 
-        messageText.setFont(font);
-        messageText.setCharacterSize(28);
-        messageText.setFillColor(sf::Color::White);
-    }
+    Clock spawnClock;
 
-    auto resetGame = [&]() {
-        clock.restart();
-        totalTime = 0.f;
-        spawnTimer = 0.f;
-        speedLevel = 1.f;
-        score = 0;
-        dodgedCars = 0;
-        enemies.clear();
-        player.setLane(1, laneCenters, 520.f);
-        updateHud(hudText, fontLoaded, score, dodgedCars, speedLevel, baseEnemySpeed);
-    };
+    GameState gameState=MENU;
 
-    auto spawnEnemy = [&]() {
-        const DifficultyConfig cfg = getConfig(difficulty);
-        std::uniform_int_distribution<int> laneDist(0, static_cast<int>(laneCenters.size() - 1));
-        std::uniform_real_distribution<float> speedDist(cfg.randomSpeedMin, cfg.randomSpeedMax);
+    int score=0;
 
-        const std::size_t lane = static_cast<std::size_t>(laneDist(rng));
-        const float speed = baseEnemySpeed * speedLevel * speedDist(rng);
+    float gameSpeed=5.f,spawnInterval=1.f;
 
-        enemies.emplace_back(42.f, 80.f, speed, lane, laneCenters[lane], -40.f);
-    };
+    while(window.isOpen()){
+        Event event;
 
-    updateHud(hudText, fontLoaded, score, dodgedCars, speedLevel, baseEnemySpeed);
+        while(window.pollEvent(event)){
+            if(event.type==Event::Closed) window.close();
 
-    while (window.isOpen()) {
-        const float dt = clock.restart().asSeconds();
+            if(event.type==Event::KeyPressed){
 
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
+                if(gameState==MENU && event.key.code==Keyboard::Enter)
+                    gameState=PLAYING;
 
-            if (event.type != sf::Event::KeyPressed) {
-                continue;
-            }
+                else if(gameState==PLAYING && event.key.code==Keyboard::P)
+                    gameState=PAUSED;
 
-            if (event.key.code == sf::Keyboard::Escape) {
-                window.close();
-            }
+                else if(gameState==PAUSED && event.key.code==Keyboard::P)
+                    gameState=PLAYING;
 
-            if (state == GameState::MENU) {
-                if (event.key.code == sf::Keyboard::Num1) {
-                    difficulty = Difficulty::EASY;
-                    resetGame();
-                    state = GameState::PLAYING;
-                } else if (event.key.code == sf::Keyboard::Num2) {
-                    difficulty = Difficulty::MEDIUM;
-                    resetGame();
-                    state = GameState::PLAYING;
-                } else if (event.key.code == sf::Keyboard::Num3) {
-                    difficulty = Difficulty::HARD;
-                    resetGame();
-                    state = GameState::PLAYING;
+                else if(gameState==GAMEOVER && event.key.code==Keyboard::R){
+                    enemies.clear();
+                    score=0;
+                    gameSpeed=5.f;
+                    spawnInterval=1.f;
+                    bgMusic.play();
+                    player.getSprite().setPosition(400,580);
+                    gameState=MENU;
                 }
-                continue;
-            }
-
-            if (event.key.code == sf::Keyboard::P) {
-                if (state == GameState::PLAYING) {
-                    state = GameState::PAUSED;
-                } else if (state == GameState::PAUSED) {
-                    state = GameState::PLAYING;
-                }
-            }
-
-            if (state == GameState::PLAYING) {
-                if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::A) {
-                    player.moveLeft();
-                    player.setLane(player.getLaneIndex(), laneCenters, 520.f);
-                }
-                if (event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::D) {
-                    player.moveRight(laneCenters.size());
-                    player.setLane(player.getLaneIndex(), laneCenters, 520.f);
-                }
-            }
-
-            if (state == GameState::GAME_OVER && event.key.code == sf::Keyboard::R) {
-                resetGame();
-                state = GameState::PLAYING;
             }
         }
 
-        if (state == GameState::PLAYING) {
-            totalTime += dt;
-            speedLevel += dt * 0.12f;
+        if(gameState==PLAYING){
 
-            const DifficultyConfig cfg = getConfig(difficulty);
-            const float spawnInterval = std::max(cfg.minSpawnInterval, cfg.initialSpawnInterval - totalTime * cfg.spawnDecay);
+            player.update(gameSpeed);
 
-            spawnTimer += dt;
-            while (spawnTimer >= spawnInterval) {
-                spawnTimer -= spawnInterval;
-                spawnEnemy();
+            if(spawnClock.getElapsedTime().asSeconds()>spawnInterval){
+                enemies.push_back(
+                    EnemyCar(lanes[rand()%3],gameSpeed+(rand()%3))
+                );
+
+                spawnClock.restart();
             }
 
-            for (EnemyCar& enemy : enemies) {
-                enemy.update(dt);
-            }
-
-            enemies.erase(
-                std::remove_if(enemies.begin(), enemies.end(), [&](const EnemyCar& enemy) {
-                    if (enemy.getPosition().y - enemy.getBounds().height * 0.5f > windowHeightF) {
-                        ++dodgedCars;
-                        return true;
-                    }
-                    return false;
-                }),
-                enemies.end());
-
-            for (const EnemyCar& enemy : enemies) {
-                if (player.getBounds().intersects(enemy.getBounds())) {
-                    state = GameState::GAME_OVER;
-                    break;
+            for(int i=0;i<enemies.size();i++){
+                enemies[i].update(gameSpeed);
+                if(player.getBounds().intersects(enemies[i].getBounds())){
+                    crashSound.play();
+                    bgMusic.stop();
+                    gameState=GAMEOVER;
                 }
             }
 
-            score = static_cast<int>(totalTime * 10.f) + (dodgedCars * 25);
-            updateHud(hudText, fontLoaded, score, dodgedCars, speedLevel, baseEnemySpeed);
+            while(!enemies.empty() && enemies.front().offScreen()){
+                enemies.erase(enemies.begin());
+                score++;
+
+                if(score%5==0){
+                    gameSpeed+=0.5f;
+
+                    if(spawnInterval>0.4f)
+                        spawnInterval-=0.05f;
+                }
+            }
         }
 
-        window.clear(sf::Color(18, 120, 18));
+        window.clear(Color(30,30,30));
+
+        RectangleShape road(Vector2f(400,HEIGHT));
+        road.setFillColor(Color::Black);
+        road.setPosition(200,0);
+
         window.draw(road);
 
-        const float divider1 = road.getPosition().x + road.getSize().x / 3.f;
-        const float divider2 = road.getPosition().x + (road.getSize().x * 2.f / 3.f);
-        const float dashSpacing = 42.f;
-        for (float y = 0.f; y < windowHeightF; y += dashSpacing) {
-            sf::RectangleShape dash(sf::Vector2f(7.f, 24.f));
-            dash.setFillColor(sf::Color(235, 235, 235));
-            dash.setPosition(divider1 - 3.5f, y);
-            window.draw(dash);
-            dash.setPosition(divider2 - 3.5f, y);
-            window.draw(dash);
+        for(int y=0;y<HEIGHT;y+=80){
+            RectangleShape line(Vector2f(12,50));
+            line.setFillColor(Color::White);
+            line.setPosition(394,y);
+            window.draw(line);
         }
 
-        for (const EnemyCar& enemy : enemies) {
-            enemy.draw(window);
-        }
         player.draw(window);
 
-        if (fontLoaded) {
-            window.draw(hudText);
+        for(int i=0;i<enemies.size();i++)
+            enemies[i].draw(window);
 
-            if (state == GameState::MENU) {
-                messageText.setCharacterSize(30);
-                messageText.setString(
-                    "Car Dodging Game\n\nPress 1 - Easy\nPress 2 - Medium\nPress 3 - Hard\n\nESC - Quit");
-                messageText.setPosition(220.f, 150.f);
-                window.draw(messageText);
-            } else if (state == GameState::PAUSED) {
-                messageText.setCharacterSize(38);
-                messageText.setString("Paused\nPress P to Resume");
-                messageText.setPosition(250.f, 250.f);
-                window.draw(messageText);
-            } else if (state == GameState::GAME_OVER) {
-                messageText.setCharacterSize(34);
-                messageText.setString("Game Over\nPress R to Restart");
-                messageText.setPosition(240.f, 240.f);
-                window.draw(messageText);
-            }
+        scoreText.setString("SCORE: "+to_string(score));
+        speedText.setString("SPEED: "+to_string((int)gameSpeed));
+
+        window.draw(scoreText);
+        window.draw(speedText);
+
+        if(gameState==MENU)
+            infoText.setString("CAR DODGING GAME\n\nPress ENTER to Start");
+
+        if(gameState==PAUSED)
+            infoText.setString("PAUSED\n\nPress P to Resume");
+
+        if(gameState==GAMEOVER)
+            infoText.setString("GAME OVER\n\nPress R to Restart");
+
+        if(gameState!=PLAYING){
+            FloatRect bounds=infoText.getLocalBounds();
+            infoText.setOrigin(bounds.width/2,bounds.height/2
+            );
+
+            infoText.setPosition(WIDTH/2,HEIGHT/2
+            );
+
+            window.draw(infoText);
         }
 
         window.display();

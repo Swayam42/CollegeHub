@@ -1,13 +1,16 @@
-#pragma once
+#ifndef ENEMYCAR_H
+#define ENEMYCAR_H
 
 #include "Car.h"
 
-class EnemyCar : public Car {
+class EnemyCar : public Car{
 private:
-    std::size_t m_LaneIndex;
+    float enemySpeed;
 
 public:
-    EnemyCar(float width, float height, float speed, std::size_t laneIndex, float x, float y);
-
-    std::size_t getLaneIndex() const;
+    EnemyCar(float x, float speed);
+    void update(float speed) override;
+    bool offScreen();
 };
+
+#endif

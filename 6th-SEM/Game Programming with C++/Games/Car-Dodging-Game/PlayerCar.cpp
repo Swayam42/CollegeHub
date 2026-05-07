@@ -1,32 +1,82 @@
 #include "PlayerCar.h"
 
-PlayerCar::PlayerCar(float width, float height, float speed)
-    : Car(width, height, sf::Color::White, speed),
-      m_LaneIndex(1)
+using namespace sf;
+
+//-----------------------------------
+// Shared Texture
+//-----------------------------------
+
+namespace
 {
+    Texture playerTexture;
+
+    bool loaded = false;
 }
 
-void PlayerCar::moveLeft()
+PlayerCar::PlayerCar()
 {
-    if (m_LaneIndex > 0) {
-        --m_LaneIndex;
+    //-----------------------------------
+    // Load once
+    //-----------------------------------
+
+    if (!loaded)
+    {
+        playerTexture.loadFromFile(
+            "assets/graphics/WhiteCar.png");
+
+        loaded = true;
+    }
+
+    //-----------------------------------
+
+    sprite.setTexture(playerTexture);
+
+    //-----------------------------------
+    // Better scaling
+    //-----------------------------------
+
+    sprite.setScale(0.4f, 0.4f);
+
+    //-----------------------------------
+    // Center origin
+    //-----------------------------------
+
+    FloatRect bounds =
+        sprite.getLocalBounds();
+
+    sprite.setOrigin(
+        bounds.width / 2.f,
+        bounds.height / 2.f);
+
+    //-----------------------------------
+
+    sprite.setPosition(400, 580);
+}
+
+void PlayerCar::handleInput()
+{
+    float moveSpeed = 7.f;
+
+    if (Keyboard::isKeyPressed(
+            Keyboard::Left))
+    {
+        if (sprite.getPosition().x > 260)
+        {
+            sprite.move(-moveSpeed, 0);
+        }
+    }
+
+    if (Keyboard::isKeyPressed(
+            Keyboard::Right))
+    {
+        if (sprite.getPosition().x < 540)
+        {
+            sprite.move(moveSpeed, 0);
+        }
     }
 }
 
-void PlayerCar::moveRight(std::size_t laneCount)
+void PlayerCar::update(float speed)
 {
-    if (m_LaneIndex + 1 < laneCount) {
-        ++m_LaneIndex;
-    }
-}
-
-void PlayerCar::setLane(std::size_t laneIndex, const std::vector<float>& laneCenters, float y)
-{
-    m_LaneIndex = laneIndex;
-    setPosition(laneCenters[m_LaneIndex], y);
-}
-
-std::size_t PlayerCar::getLaneIndex() const
-{
-    return m_LaneIndex;
+    handleInput();
 }
