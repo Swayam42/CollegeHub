@@ -3,6 +3,7 @@
 *.out
 *.app
 *.dSYM/
+6th-SEM/Game Programming with C++/Games/Flappy-Bird/FlappyBird
 
 # C/C++ compiled files
 *.o
