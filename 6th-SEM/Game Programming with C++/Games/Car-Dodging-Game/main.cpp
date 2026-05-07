@@ -214,17 +214,15 @@ int main()
                 enemy.update(dt);
             }
 
-            int removedCarsThisFrame = 0;
             enemies.erase(
                 std::remove_if(enemies.begin(), enemies.end(), [&](const EnemyCar& enemy) {
                     if (enemy.getPosition().y - enemy.getBounds().height * 0.5f > windowHeightF) {
-                        ++removedCarsThisFrame;
+                        ++dodgedCars;
                         return true;
                     }
                     return false;
                 }),
                 enemies.end());
-            dodgedCars += removedCarsThisFrame;
 
             for (const EnemyCar& enemy : enemies) {
                 if (player.getBounds().intersects(enemy.getBounds())) {
@@ -242,13 +240,13 @@ int main()
 
         const float divider1 = road.getPosition().x + road.getSize().x / 3.f;
         const float divider2 = road.getPosition().x + (road.getSize().x * 2.f / 3.f);
-        const unsigned int dashSpacing = 42U;
-        for (unsigned int y = 0; y < windowHeight; y += dashSpacing) {
+        const float dashSpacing = 42.f;
+        for (float y = 0.f; y < windowHeightF; y += dashSpacing) {
             sf::RectangleShape dash(sf::Vector2f(7.f, 24.f));
             dash.setFillColor(sf::Color(235, 235, 235));
-            dash.setPosition(divider1 - 3.5f, static_cast<float>(y));
+            dash.setPosition(divider1 - 3.5f, y);
             window.draw(dash);
-            dash.setPosition(divider2 - 3.5f, static_cast<float>(y));
+            dash.setPosition(divider2 - 3.5f, y);
             window.draw(dash);
         }
 
