@@ -1,0 +1,4 @@
+g++ main.cpp Game.cpp Car.cpp PlayerCar.cpp EnemyCar.cpp \
+    -o CarDodgingGame \
+    -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio \
+    && ./CarDodgingGame
