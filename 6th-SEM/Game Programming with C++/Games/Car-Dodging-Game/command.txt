@@ -1,0 +1,1 @@
+g++ main.cpp Car.cpp PlayerCar.cpp EnemyCar.cpp -o main -lsfml-graphics -lsfml-window -lsfml-system && ./main
