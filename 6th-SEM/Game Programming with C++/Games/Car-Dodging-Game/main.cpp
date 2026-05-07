@@ -58,14 +58,18 @@ static void updateHud(sf::Text& hudText, bool fontLoaded, int score, int dodgedC
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Car Dodging Game");
+    const unsigned int windowWidth = 800U;
+    const unsigned int windowHeight = 600U;
+    const float windowHeightF = static_cast<float>(windowHeight);
+
+    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Car Dodging Game");
     window.setFramerateLimit(60);
 
     sf::Clock clock;
     GameState state = GameState::MENU;
     Difficulty difficulty = Difficulty::MEDIUM;
 
-    sf::RectangleShape road(sf::Vector2f(420.f, 600.f));
+    sf::RectangleShape road(sf::Vector2f(420.f, windowHeightF));
     road.setFillColor(sf::Color(45, 45, 45));
     road.setPosition(190.f, 0.f);
 
@@ -81,7 +85,8 @@ int main()
     player.setLane(1, laneCenters, 520.f);
 
     std::vector<EnemyCar> enemies;
-    std::mt19937 rng;
+    std::random_device randomDevice;
+    std::mt19937 rng(randomDevice());
 
     float totalTime = 0.f;
     float spawnTimer = 0.f;
@@ -209,15 +214,13 @@ int main()
                 enemy.update(dt);
             }
 
+            const std::size_t previousEnemyCount = enemies.size();
             enemies.erase(
                 std::remove_if(enemies.begin(), enemies.end(), [&](const EnemyCar& enemy) {
-                    if (enemy.getPosition().y - enemy.getBounds().height * 0.5f > 600.f) {
-                        ++dodgedCars;
-                        return true;
-                    }
-                    return false;
+                    return enemy.getPosition().y - enemy.getBounds().height * 0.5f > windowHeightF;
                 }),
                 enemies.end());
+            dodgedCars += static_cast<int>(previousEnemyCount - enemies.size());
 
             for (const EnemyCar& enemy : enemies) {
                 if (player.getBounds().intersects(enemy.getBounds())) {
@@ -235,7 +238,7 @@ int main()
 
         const float divider1 = road.getPosition().x + road.getSize().x / 3.f;
         const float divider2 = road.getPosition().x + (road.getSize().x * 2.f / 3.f);
-        for (int y = 0; y < 600; y += 42) {
+        for (unsigned int y = 0; y < windowHeight; y += 42U) {
             sf::RectangleShape dash(sf::Vector2f(7.f, 24.f));
             dash.setFillColor(sf::Color(235, 235, 235));
             dash.setPosition(divider1 - 3.5f, static_cast<float>(y));
