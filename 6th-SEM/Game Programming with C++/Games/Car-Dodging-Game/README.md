@@ -10,22 +10,15 @@ A simple lane-based 2D car dodging game.
 - Score + speed level display
 - Difficulty selection: `1` Easy, `2` Medium, `3` Hard
 - Pause/Resume (`P`), Restart after game over (`R`), Quit (`ESC`)
-- Optional audio loading (`assets/music.ogg`, `assets/crash.wav`)
 
 ## Build and Run (Ubuntu)
 From this folder:
 
 ```bash
-g++ main.cpp Game.cpp Car.cpp PlayerCar.cpp EnemyCar.cpp \
-    -o CarDodgingGame \
-    -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio \
-    && ./CarDodgingGame
+g++ main.cpp Car.cpp PlayerCar.cpp EnemyCar.cpp -o main -lsfml-graphics -lsfml-window -lsfml-system && ./main
 ```
 
 ## Assets
 - Font: game tries `assets/font/KOMIKAP_.ttf` first, then `assets/arial.ttf`.
-- Audio (optional):
-  - `assets/music.ogg` (background music)
-  - `assets/crash.wav` (collision sound)
 
-If optional assets are missing, the game continues silently.
+If font assets are missing, gameplay still runs and text is skipped.
