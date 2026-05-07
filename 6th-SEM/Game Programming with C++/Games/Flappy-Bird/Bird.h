@@ -1,36 +1,22 @@
-#pragma once
+#ifndef BIRD_H
+#define BIRD_H
+
 #include <SFML/Graphics.hpp>
-
-// Difficulty settings passed to several classes
-enum class Difficulty { EASY, MEDIUM, HARD };
-
-class Bird {
+using namespace sf;
+class Bird{
 private:
-    sf::Vector2f m_Position;
-
-    // Sprite-based rendering (when assets/bird.png is available)
-    sf::Texture m_Texture;
-    sf::Sprite  m_Sprite;
-
-    // Fallback shape when texture is missing
-    sf::RectangleShape m_Shape;
-
-    bool m_TextureLoaded;
-
-    float m_VelocityY;
-
-    static const float GRAVITY;        // px/s²
-    static const float FLAP_STRENGTH;  // px/s (negative = upward)
-    static const float SCALED_W;       // display width
-    static const float SCALED_H;       // display height
+    Texture texture;
+    Sprite spriteBird;
+    float velocity;
 
 public:
-    Bird(float startX, float startY);
-
+    Bird();
     void flap();
-    void update(sf::Time dt);
-    void reset(float startX, float startY);
-
-    sf::FloatRect getBounds() const;
-    void draw(sf::RenderWindow& window);
+    void update();
+    void reset();
+    void draw(RenderWindow &window);
+    FloatRect getBounds();
+    float getY();
 };
+
+#endif
