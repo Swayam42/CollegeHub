@@ -2,21 +2,16 @@
 #define CAR_H
 
 #include <SFML/Graphics.hpp>
-
-class Car
-{
+using namespace sf;
+class Car{
 protected:
-    sf::Sprite sprite;
-    sf::Texture texture;
+    Sprite sprite;
+    Texture texture;
 
 public:
     virtual void update(float speed) = 0;
-
-    void draw(sf::RenderWindow &window);
-
-    sf::FloatRect getBounds();
-
-    sf::Sprite &getSprite();
+    void draw(RenderWindow &window);
+    FloatRect getBounds();
+    Sprite &getSprite();
 };
-
 #endif
