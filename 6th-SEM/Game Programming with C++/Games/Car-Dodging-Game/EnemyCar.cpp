@@ -39,7 +39,7 @@ EnemyCar::EnemyCar(float x, float speed){
         sprite.setTexture(yellow3);
         break;
     }
-    sprite.setScale(0.4f, 0.4f);
+    sprite.setScale(0.4f, 0.5f);
     FloatRect bounds = sprite.getLocalBounds();
 
     sprite.setOrigin(

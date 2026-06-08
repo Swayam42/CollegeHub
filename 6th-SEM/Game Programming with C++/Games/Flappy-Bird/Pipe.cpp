@@ -2,13 +2,7 @@
 #include <iostream>
 
 using namespace sf;
-
-//-------------------------------------
-// Shared Texture
-//-------------------------------------
-
-namespace
-{
+namespace{
     Texture pipeTexture;
     bool loaded = false;
 }

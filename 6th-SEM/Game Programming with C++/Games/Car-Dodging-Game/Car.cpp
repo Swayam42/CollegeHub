@@ -1,12 +1,10 @@
 #include "Car.h"
 using namespace sf;
-void Car::draw(RenderWindow &window)
-{
+void Car::draw(RenderWindow &window){
     window.draw(sprite);
 }
 
-FloatRect Car::getBounds()
-{
+FloatRect Car::getBounds(){
     return sprite.getGlobalBounds();
 }
 

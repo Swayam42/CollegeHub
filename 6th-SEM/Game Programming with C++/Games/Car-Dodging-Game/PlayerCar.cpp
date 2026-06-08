@@ -11,7 +11,7 @@ PlayerCar::PlayerCar(){
     playerTexture.loadFromFile("assets/graphics/WhiteCar.png");
 
     sprite.setTexture(playerTexture);
-    sprite.setScale(0.4f, 0.4f);
+    sprite.setScale(0.4f, 0.5f);
     FloatRect bounds =sprite.getLocalBounds();
 
     sprite.setOrigin(bounds.width / 2.f,bounds.height / 2.f);
